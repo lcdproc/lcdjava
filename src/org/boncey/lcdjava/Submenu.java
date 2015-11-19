@@ -6,7 +6,7 @@ import java.util.Map;
 
 /**
  * Submenu.
- * <p>Displays the submenus name with tailing ">"
+ * <p>Displays the submenus name with tailing submenu marker
  * @author StefanKrupop
  */
 public class Submenu extends AbstractMenuItem 

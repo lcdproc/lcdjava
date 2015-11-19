@@ -57,7 +57,7 @@ public class ActionMenuItem extends AbstractMenuItem
 
     /**
      * Sets what to do with the menu when this action is selected
-     * @param result
+     * @param result the MenuResult
      */
     public void setMenuResult(MenuResult result) {
     	_menuResult = result;
@@ -84,6 +84,7 @@ public class ActionMenuItem extends AbstractMenuItem
      * Construct a new ActionMenuItem.
      * @param menu the Submenu that owns the menu item.
      * @param text the menu text.
+     * @param result the MenuResult defining what to do when action is selected
      * @return a new ActionMenuItem.
      */
     public static ActionMenuItem construct(Submenu menu, String text, MenuResult result)

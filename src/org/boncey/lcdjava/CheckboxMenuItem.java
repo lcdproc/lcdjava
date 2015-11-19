@@ -117,6 +117,7 @@ public class CheckboxMenuItem extends AbstractMenuItem
      * Construct a new ActionMenuItem.
      * @param menu the Submenu that owns the menu item.
      * @param text the menu text.
+     * @param allowGray whether the "Gray" state is allowed
      * @return a new ActionMenuItem.
      */
     public static CheckboxMenuItem construct(Submenu menu, String text, boolean allowGray)
