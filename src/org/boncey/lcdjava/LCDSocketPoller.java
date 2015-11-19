@@ -36,6 +36,12 @@ public class LCDSocketPoller implements Runnable
     private static final Pattern IGNORE_STATUS = Pattern.compile(
             "(ignore|listen)\\s+(\\d+).*");
 
+    /**
+     * The Pattern that matches menu events.
+     */
+    private static final Pattern MENU_STATUS = Pattern.compile(
+            "menuevent\\s+(\\w+)\\s+(\\w+)\\s*(.*)");
+    
     /** 
      * The Reader to read data from.
      */
@@ -81,29 +87,33 @@ public class LCDSocketPoller implements Runnable
     {
         while (_alive)
         {
-            synchronized (this)
-            {
-                try
-                {
+            try {
+                if (!_in.ready())
                     Thread.sleep(POLL);
+                synchronized (this)
+                {
                     if (_in.ready())
                     {
                         _lastLine = _in.readLine();
-                        Matcher m = IGNORE_STATUS.matcher(_lastLine);
+                        if (_lastLine == null)
+                            continue;
+                        Matcher listenIgnore = IGNORE_STATUS.matcher(_lastLine);
+                        Matcher menuEvent = MENU_STATUS.matcher(_lastLine);
                         if (_lastLine.startsWith(LCD.RESPONSE_ERROR))
                         {
                             _log.warn("Got a response of " + _lastLine +
                                     " from server");
                         }
-                        else if (m.matches())
+                        else if (_listener != null)
                         {
-                            if (_listener != null)
+
+                            if (listenIgnore.matches())
                             {
                                 boolean listen = (LCD.RESPONSE_LISTEN.equals(
-                                            m.group(1)));
+                                            listenIgnore.group(1)));
                                 try
                                 {
-                                    int screenId = Integer.parseInt(m.group(2));
+                                    int screenId = Integer.parseInt(listenIgnore.group(2));
                                     _listener.setListenStatus(screenId, listen);
                                 }
                                 catch (NumberFormatException e)
@@ -111,17 +121,21 @@ public class LCDSocketPoller implements Runnable
                                     // Ignore
                                 }
                             }
+                            else if (menuEvent.matches())
+                            {
+                                _listener.menuAction(menuEvent.group(2), menuEvent.group(1), menuEvent.group(3));
+                            }
                         }
                     }
                 }
-                catch (InterruptedException e)
-                {
-                    // Do nothing
-                }
-                catch (IOException e)
-                {
-                    _log.error("Caught IOException", e);
-                }
+            }
+            catch (InterruptedException e)
+            {
+                // Do nothing
+            }
+            catch (IOException e)
+            {
+                _log.error("Caught IOException", e);
             }
         }
 
