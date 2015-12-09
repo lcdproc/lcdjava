@@ -1,5 +1,6 @@
 package org.boncey.lcdjava;
 
+import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
@@ -11,6 +12,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.apache.log4j.Logger;
+import org.boncey.lcdjava.CheckboxMenuItem.CheckboxValue;
 
 /**
  * Class to control access to an LCDproc LCDd daemon.
@@ -87,7 +89,7 @@ public class LCD implements LCDListener
     /** 
      * The command to send to the server to identify ourselves.
      */
-    public static final String CMD_CLIENT_SET = "client_set -name lcdjava/1.0";
+    public static final String CMD_CLIENT_SET = "client_set -name ";
 
     /** 
      * The command to send to the server to add a Screen.
@@ -119,6 +121,46 @@ public class LCD implements LCDListener
      */
     public static final String CMD_WIDGET_DEL = "widget_del ";
 
+    /** 
+     * The command to send to the server to add a menu item.
+     */
+    public static final String CMD_MENU_ADD = "menu_add_item ";
+
+    /** 
+     * The command to send to the server to remove a menu item.
+     */
+    public static final String CMD_MENU_DEL = "menu_del_item ";
+
+    /** 
+     * The command to send to the server to set (modify) a MenuItem.
+     */
+    public static final String CMD_MENU_SET = "menu_set_item ";
+
+    /** 
+     * The command to send to the server to set a menu as main menu
+     */
+    public static final String CMD_MENU_SET_MAIN = "menu_set_main ";
+    
+    /** 
+     * The response from LCDd that indicates an action menu item was selected.
+     */
+    public static final String EVENT_SELECT = "select";
+    
+    /** 
+     * The response from LCDd that indicates an menu item was updated.
+     */
+    public static final String EVENT_UPDATE = "update";
+
+    /** 
+     * The response from LCDd that indicates a slider was moved to the right.
+     */
+    public static final String EVENT_PLUS = "plus";
+
+    /** 
+     * The response from LCDd that indicates a slider was moved to the left.
+     */
+    public static final String EVENT_MINUS = "minus";
+    
     /** 
      * The protocol version that we know how to deal with.
      */
@@ -200,6 +242,11 @@ public class LCD implements LCDListener
      */
     private int _screenCounter;
 
+    /** 
+     * The root of the client's menu
+     */
+    private Submenu _rootMenu;
+    
     /**
      * Public constructor.
      * @param host the LCDd host.
@@ -209,11 +256,25 @@ public class LCD implements LCDListener
     public LCD(String host, int port)
         throws LCDException
     {
+    	this(host, port, "lcdjava/1.0");
+    }
+    
+    /**
+     * Public constructor.
+     * @param host the LCDd host.
+     * @param port the LCDd port.
+     * @param clientName the name of this client as shown to the user
+     * @throws LCDException if there was a problem connecting to the server.
+     */
+    public LCD(String host, int port, String clientName)
+        throws LCDException
+    {
         _screens = new HashMap();
+        _rootMenu = new Submenu(this);
 
         try
         {
-            String response = connect(host, port);
+            String response = connect(host, port, clientName);
             if (response == null)
             {
                 throw new LCDException(
@@ -323,6 +384,71 @@ public class LCD implements LCDListener
         }
     }
 
+    /** 
+     * The user interacted with a menu
+     * @param menuId the id of the menu item.
+     * @param eventType the type of the event that occured
+     * @param value the value returned or <code>null</code>when not available
+     */
+    @Override
+	public void menuAction(String menuId, String eventType, String value) {
+		String menuParts[] = menuId.split("_");
+		StringBuilder id = new StringBuilder();
+		MenuItem menu = _rootMenu;
+		for (String part : menuParts) {
+			if (!"".equals(part)) {
+				id.append('_');
+				id.append(part);
+				if (menu instanceof Submenu) {
+					menu = ((Submenu)menu).getMenuItem(id.toString());
+				} else {
+					break;
+				}
+				if (menu == null) {
+					break;
+				}
+			}
+		}
+		if (menu != null) {
+			if (eventType.equals(LCD.EVENT_SELECT)) {
+				if (menu instanceof ActionMenuItem) {
+					((ActionMenuItem)menu).notifyActionPerformed(new ActionEvent(menu, ActionEvent.ACTION_PERFORMED, menu.getID()));
+				}
+			} else if (eventType.equals(LCD.EVENT_UPDATE)) {
+				if (menu instanceof CheckboxMenuItem) {
+					if ("on".equals(value)) {
+						((CheckboxMenuItem)menu).setValueNoUpdate(CheckboxValue.On);
+					} else if ("off".equals(value)) {
+						((CheckboxMenuItem)menu).setValueNoUpdate(CheckboxValue.Off);
+					} else if ("gray".equals(value)) {
+						((CheckboxMenuItem)menu).setValueNoUpdate(CheckboxValue.Gray);
+					}
+					((CheckboxMenuItem)menu).notifyActionPerformed(new ActionEvent(menu, ActionEvent.ACTION_PERFORMED, menu.getID()));
+				} else if (menu instanceof RingMenuItem) {
+					((RingMenuItem)menu).setValueNoUpdate(Integer.parseInt(value));
+					((RingMenuItem)menu).notifyActionPerformed(new ActionEvent(menu, ActionEvent.ACTION_PERFORMED, menu.getID()));
+				} else if (menu instanceof NumericMenuItem) {
+					((NumericMenuItem)menu).setValueNoUpdate(Integer.parseInt(value));
+					((NumericMenuItem)menu).notifyActionPerformed(new ActionEvent(menu, ActionEvent.ACTION_PERFORMED, menu.getID()));
+				} else if (menu instanceof AlphaMenuItem) {
+					((AlphaMenuItem)menu).setValueNoUpdate(value);
+					((AlphaMenuItem)menu).notifyActionPerformed(new ActionEvent(menu, ActionEvent.ACTION_PERFORMED, menu.getID()));
+				} else if (menu instanceof IpMenuItem) {
+					((IpMenuItem)menu).setValueNoUpdate(value);
+					((IpMenuItem)menu).notifyActionPerformed(new ActionEvent(menu, ActionEvent.ACTION_PERFORMED, menu.getID()));
+				}
+			} else if (eventType.equals(LCD.EVENT_PLUS) || eventType.equals(LCD.EVENT_MINUS)) {
+				if (menu instanceof SliderMenuItem) {
+					int v = Integer.parseInt(value);
+					if (v != ((SliderMenuItem)menu).getValue()) {
+						((SliderMenuItem)menu).setValueNoUpdate(v);
+						((NumericMenuItem)menu).notifyActionPerformed(new ActionEvent(menu, ActionEvent.ACTION_PERFORMED, menu.getID()));
+					}
+				}
+			}
+		}
+	}
+    
     /** 
      * Shut down the server, terminating any threads.
      * @throws LCDException in case of a network problem.
@@ -448,6 +574,10 @@ public class LCD implements LCDListener
         return (Screen)_screens.remove(new Integer(screenId));
     }
 
+	public Submenu getRootMenu() {
+		return _rootMenu;
+	}
+    
     /** 
      * Parse the init string and split up into groups.
      * @param init the init string.
@@ -484,10 +614,11 @@ public class LCD implements LCDListener
      * Connect to the LCDd server.
      * @param host the hostname to connect to.
      * @param port the port to connect to.
+     * @param clientName the name of this client as shown to the user
      * @return the response from the server.
      * @throws IOException in case of a network problem.
      */
-    private String connect(String host, int port)
+    private String connect(String host, int port, String clientName)
         throws IOException
     {
         _socket = new Socket(host, port);
@@ -517,7 +648,7 @@ public class LCD implements LCDListener
                 }
             }
         }
-        write(CMD_CLIENT_SET);
+        write(CMD_CLIENT_SET + clientName);
 
         return response;
     }
