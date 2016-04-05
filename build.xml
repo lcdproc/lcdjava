@@ -47,7 +47,7 @@
                 destdir="${project.classes}"
                 debug="on"
                 deprecation="on"
-                source="1.4"
+                source="1.6"
                 optimize="on"
                 excludes="**/generated/**">
             <classpath refid="classpath" />
@@ -67,7 +67,7 @@
                 doctitle="${Name}"
                 bottom="Copyright &#169; 2004-2005 Darren Greaves."
                 additionalparam="-linksource"
-                source="1.4"
+                source="1.6"
             >
             <classpath refid="classpath" />
             <group title="LcdJava" packages="${lcdjava}"/>
