@@ -431,7 +431,7 @@ public class Screen
     public synchronized Widget constructWidget(String type)
         throws LCDException
     {
-        Widget widget = null;
+        Widget widget;
 
         if (type.equals(Widget.WIDGET_TITLE))
         {

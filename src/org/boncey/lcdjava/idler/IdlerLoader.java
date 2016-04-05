@@ -121,11 +121,6 @@ public class IdlerLoader
 
         if (idlers.size() > 0)
         {
-            for (Iterator i = idlers.iterator(); i.hasNext();)
-            {
-                Idler idler = (Idler)i.next();
-            }
-
             _updater = new IdlerWidgetUpdater(scroller, name, idlers);
 
             _timer = new WidgetTimer(_updater, ONE_MINUTE);

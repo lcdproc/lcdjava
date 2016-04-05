@@ -139,7 +139,7 @@ public class ScreenThread implements Runnable
                         if (_step > 0)
                         {
                             _step--;
-                            if (_priority != _screen.getPriority())
+                            if (!_priority.equals(_screen.getPriority()))
                             {
                                 start();
                             }
