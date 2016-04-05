@@ -59,7 +59,7 @@ public class ScreenThread implements Runnable
      * A List of TimeoutHook objects that want to be notified when the thread
      * times out.
      */
-    private List _timeoutHooks;
+    private List<TimeoutHook> _timeoutHooks;
 
     /** 
      * How many times to count down before calling stop.
@@ -88,7 +88,7 @@ public class ScreenThread implements Runnable
         _priority = priority;
         _dieOnTimeout = dieOnTimeout;
 
-        _timeoutHooks = new ArrayList();
+        _timeoutHooks = new ArrayList<>();
     }
 
     /**

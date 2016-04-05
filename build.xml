@@ -41,6 +41,7 @@
                 excludes="**/generated/**"
                 includeantruntime="false">
             <classpath refid="classpath" />
+            <compilerarg value="-Xlint:unchecked" />
         </javac>
     </target>
 

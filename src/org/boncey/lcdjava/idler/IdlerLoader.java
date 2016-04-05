@@ -162,7 +162,7 @@ public class IdlerLoader
     private List loadConfig(Element config)
         throws LCDException
     {
-        List idlers = new ArrayList();
+        List<Idler> idlers = new ArrayList<>();
         NodeList nodes = config.getChildNodes();
 
         for (int i = 0; i < nodes.getLength(); i++) 
@@ -266,9 +266,8 @@ public class IdlerLoader
         Object[] args = new Object[] {moduleConfig, name};
 
         Class c = Class.forName(className);
+        @SuppressWarnings("unchecked")
         Constructor constructor = c.getConstructor(types);
-        Idler idler = (Idler)constructor.newInstance(args);
-
-        return idler;
+        return (Idler)constructor.newInstance(args);
     }
 }

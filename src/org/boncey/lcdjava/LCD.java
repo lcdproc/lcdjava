@@ -234,7 +234,7 @@ public class LCD implements LCDListener
     /** 
      * The Map of Screens, indexed by the Screen id.
      */
-    private Map _screens;
+    private Map<Integer, Screen> _screens;
 
     /** 
      * The count of screens we have created.
@@ -269,7 +269,7 @@ public class LCD implements LCDListener
     public LCD(String host, int port, String clientName)
         throws LCDException
     {
-        _screens = new HashMap();
+        _screens = new HashMap<>();
         _rootMenu = new Submenu(this);
 
         try
