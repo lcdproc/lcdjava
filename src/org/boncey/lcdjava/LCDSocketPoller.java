@@ -131,7 +131,7 @@ public class LCDSocketPoller implements Runnable
             }
             catch (InterruptedException e)
             {
-                // Do nothing
+                _log.debug("Interrupted");
             }
             catch (IOException e)
             {
@@ -139,6 +139,7 @@ public class LCDSocketPoller implements Runnable
             }
         }
 
+        _log.debug("Terminating");
         _polling = false;
     }
 

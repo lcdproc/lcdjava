@@ -200,6 +200,7 @@ public class LCD implements LCDListener
      * manner.
      */
     private LCDSocketPoller _poller;
+    private Thread _poller_thread;
 
     /** 
      * The software version of LCDd.
@@ -456,17 +457,21 @@ public class LCD implements LCDListener
     public void shutdown()
         throws LCDException
     {
+        _log.debug("Shutdown requested");
         if (_poller != null)
         {
             _poller.shutdown();
-            while (_poller.isPolling())
-            {
-                // loop until LCDSocketPoller has stopped polling
+            _log.debug("Waiting for LCDSocketPoller to terminate...");
+            try {
+                _poller_thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
 
         try
         {
+            _log.debug("Closing socket");
             if (_socket != null && !_socket.isClosed())
             {
                 _socket.close();
@@ -627,8 +632,8 @@ public class LCD implements LCDListener
         _out = new BufferedWriter(new OutputStreamWriter(
                     _socket.getOutputStream()));
         _poller = new LCDSocketPoller(in, this);
-        Thread t = new Thread(_poller);
-        t.start();
+        _poller_thread = new Thread(_poller);
+        _poller_thread.start();
 
         write(CMD_INIT);
         String response = null;
