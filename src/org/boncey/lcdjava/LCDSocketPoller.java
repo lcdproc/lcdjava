@@ -59,11 +59,6 @@ public class LCDSocketPoller implements Runnable
     private boolean _alive = true;
 
     /** 
-     * Flag that tracks if we are polling or not.
-     */
-    private boolean _polling = true;
-
-    /** 
      * The listener to notify of listen/ignore events.
      */
     private LCDListener _listener;
@@ -140,7 +135,6 @@ public class LCDSocketPoller implements Runnable
         }
 
         _log.debug("Terminating");
-        _polling = false;
     }
 
     /** 
@@ -161,15 +155,5 @@ public class LCDSocketPoller implements Runnable
     public void shutdown()
     {
         _alive = false;
-    }
-
-    /** 
-     * Is the server still polling for data.
-     * <p>Call this after shutdown to see if we are still polling.
-     * @return <code>true</code> if still polling, <code>false</code> otherwise.
-     */
-    public boolean isPolling()
-    {
-        return _polling;
     }
 }
