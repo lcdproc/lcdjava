@@ -387,7 +387,7 @@ public class LCD implements LCDListener
     /**
      * The user interacted with a menu
      * @param menuId the id of the menu item.
-     * @param eventType the type of the event that occured
+     * @param eventType the type of the event that occurred
      * @param value the value returned or <code>null</code>when not available
      */
     @Override
@@ -489,7 +489,7 @@ public class LCD implements LCDListener
 
     /**
      * Construct a new (unactivated) Screen.
-     * @param name the Screeen name.
+     * @param name the Screen name.
      * @return the newly constructed Screen.
      */
     public synchronized Screen constructScreen(String name)
@@ -499,7 +499,7 @@ public class LCD implements LCDListener
 
     /**
      * Construct a new (unactivated) Screen.
-     * @param name the Screeen name.
+     * @param name the Screen name.
      * @param priority the screen priority.
      * @return the newly constructed Screen.
      */
@@ -510,7 +510,7 @@ public class LCD implements LCDListener
 
     /**
      * Construct and optionally activate a new Screen.
-     * @param name the Screeen name.
+     * @param name the Screen name.
      * @param priority the screen priority.
      * @param activate <code>true</code> to activate this Screen immediately,
      * <code>false</code> to leave in unactivated.
