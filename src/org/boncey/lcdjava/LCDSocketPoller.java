@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
  * @author Darren Greaves
  * @version $Id: LCDSocketPoller.java,v 1.3 2008-07-06 15:38:34 boncey Exp $
  */
-public class LCDSocketPoller implements Runnable
+public class LCDSocketPoller extends Thread
 {
     /**
      * Version details.
@@ -78,6 +78,7 @@ public class LCDSocketPoller implements Runnable
     /**
      * Poll the socket every 100 milliseconds.
      */
+    @Override
     public void run()
     {
         while (_alive)
