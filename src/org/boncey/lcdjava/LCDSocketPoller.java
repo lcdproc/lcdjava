@@ -25,7 +25,7 @@ public class LCDSocketPoller implements Runnable
      */
     private static Logger _log = Logger.getLogger(LCDSocketPoller.class);
 
-    /** 
+    /**
      * How often to poll for changes.
      */
     private static final int POLL = 100;
@@ -41,24 +41,24 @@ public class LCDSocketPoller implements Runnable
      */
     private static final Pattern MENU_STATUS = Pattern.compile(
             "menuevent\\s+(\\w+)\\s+(\\w+)\\s*(.*)");
-    
-    /** 
+
+    /**
      * The Reader to read data from.
      */
     private BufferedReader _in;
 
-    /** 
+    /**
      * The last line of data received.
      * <p>Will be null if no data was received.
      */
     private String _lastLine;
 
-    /** 
+    /**
      * Flag that tracks if we are alive or not.
      */
     private boolean _alive = true;
 
-    /** 
+    /**
      * The listener to notify of listen/ignore events.
      */
     private LCDListener _listener;
@@ -75,7 +75,7 @@ public class LCDSocketPoller implements Runnable
         _listener = listener;
     }
 
-    /** 
+    /**
      * Poll the socket every 100 milliseconds.
      */
     public void run()
@@ -137,7 +137,7 @@ public class LCDSocketPoller implements Runnable
         _log.debug("Terminating");
     }
 
-    /** 
+    /**
      * Get the last line received <i>non-blocking</i>.
      * <p>Calling this clears the last line received.
      * @return the last line received.
@@ -149,7 +149,7 @@ public class LCDSocketPoller implements Runnable
         return ret;
     }
 
-    /** 
+    /**
      * Tell this thread to die gracefully.
      */
     public void shutdown()
