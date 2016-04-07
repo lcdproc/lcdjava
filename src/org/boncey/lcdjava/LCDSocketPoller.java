@@ -83,43 +83,41 @@ public class LCDSocketPoller implements Runnable
         while (_alive)
         {
             try {
-                if (!_in.ready())
+                if (!_in.ready()) {
                     Thread.sleep(POLL);
-                synchronized (this)
+                }
+                if (_in.ready())
                 {
-                    if (_in.ready())
+                    _lastLine = _in.readLine();
+                    if (_lastLine == null)
+                        continue;
+                    Matcher listenIgnore = IGNORE_STATUS.matcher(_lastLine);
+                    Matcher menuEvent = MENU_STATUS.matcher(_lastLine);
+                    if (_lastLine.startsWith(LCD.RESPONSE_ERROR))
                     {
-                        _lastLine = _in.readLine();
-                        if (_lastLine == null)
-                            continue;
-                        Matcher listenIgnore = IGNORE_STATUS.matcher(_lastLine);
-                        Matcher menuEvent = MENU_STATUS.matcher(_lastLine);
-                        if (_lastLine.startsWith(LCD.RESPONSE_ERROR))
-                        {
-                            _log.warn("Got a response of " + _lastLine +
-                                    " from server");
-                        }
-                        else if (_listener != null)
-                        {
+                        _log.warn("Got a response of " + _lastLine +
+                                " from server");
+                    }
+                    else if (_listener != null)
+                    {
 
-                            if (listenIgnore.matches())
+                        if (listenIgnore.matches())
+                        {
+                            boolean listen = (LCD.RESPONSE_LISTEN.equals(
+                                        listenIgnore.group(1)));
+                            try
                             {
-                                boolean listen = (LCD.RESPONSE_LISTEN.equals(
-                                            listenIgnore.group(1)));
-                                try
-                                {
-                                    int screenId = Integer.parseInt(listenIgnore.group(2));
-                                    _listener.setListenStatus(screenId, listen);
-                                }
-                                catch (NumberFormatException e)
-                                {
-                                    // Ignore
-                                }
+                                int screenId = Integer.parseInt(listenIgnore.group(2));
+                                _listener.setListenStatus(screenId, listen);
                             }
-                            else if (menuEvent.matches())
+                            catch (NumberFormatException e)
                             {
-                                _listener.menuAction(menuEvent.group(2), menuEvent.group(1), menuEvent.group(3));
+                                // Ignore
                             }
+                        }
+                        else if (menuEvent.matches())
+                        {
+                            _listener.menuAction(menuEvent.group(2), menuEvent.group(1), menuEvent.group(3));
                         }
                     }
                 }
