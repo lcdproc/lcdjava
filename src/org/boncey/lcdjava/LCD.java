@@ -370,7 +370,7 @@ public class LCD implements LCDListener
      */
     public void setListenStatus(int screenId, boolean listening)
     {
-        Screen screen = (Screen)_screens.get(new Integer(screenId));
+        Screen screen = _screens.get(screenId);
         if (screen != null)
         {
             screen.setListening(listening);
@@ -410,42 +410,47 @@ public class LCD implements LCDListener
 			}
 		}
 		if (menu != null) {
-			if (eventType.equals(LCD.EVENT_SELECT)) {
-				if (menu instanceof ActionMenuItem) {
-					((ActionMenuItem)menu).notifyActionPerformed(new ActionEvent(menu, ActionEvent.ACTION_PERFORMED, menu.getID()));
-				}
-			} else if (eventType.equals(LCD.EVENT_UPDATE)) {
-				if (menu instanceof CheckboxMenuItem) {
-					if ("on".equals(value)) {
-						((CheckboxMenuItem)menu).setValueNoUpdate(CheckboxValue.On);
-					} else if ("off".equals(value)) {
-						((CheckboxMenuItem)menu).setValueNoUpdate(CheckboxValue.Off);
-					} else if ("gray".equals(value)) {
-						((CheckboxMenuItem)menu).setValueNoUpdate(CheckboxValue.Gray);
-					}
-					((CheckboxMenuItem)menu).notifyActionPerformed(new ActionEvent(menu, ActionEvent.ACTION_PERFORMED, menu.getID()));
-				} else if (menu instanceof RingMenuItem) {
-					((RingMenuItem)menu).setValueNoUpdate(Integer.parseInt(value));
-					((RingMenuItem)menu).notifyActionPerformed(new ActionEvent(menu, ActionEvent.ACTION_PERFORMED, menu.getID()));
-				} else if (menu instanceof NumericMenuItem) {
-					((NumericMenuItem)menu).setValueNoUpdate(Integer.parseInt(value));
-					((NumericMenuItem)menu).notifyActionPerformed(new ActionEvent(menu, ActionEvent.ACTION_PERFORMED, menu.getID()));
-				} else if (menu instanceof AlphaMenuItem) {
-					((AlphaMenuItem)menu).setValueNoUpdate(value);
-					((AlphaMenuItem)menu).notifyActionPerformed(new ActionEvent(menu, ActionEvent.ACTION_PERFORMED, menu.getID()));
-				} else if (menu instanceof IpMenuItem) {
-					((IpMenuItem)menu).setValueNoUpdate(value);
-					((IpMenuItem)menu).notifyActionPerformed(new ActionEvent(menu, ActionEvent.ACTION_PERFORMED, menu.getID()));
-				}
-			} else if (eventType.equals(LCD.EVENT_PLUS) || eventType.equals(LCD.EVENT_MINUS)) {
-				if (menu instanceof SliderMenuItem) {
-					int v = Integer.parseInt(value);
-					if (v != ((SliderMenuItem)menu).getValue()) {
-						((SliderMenuItem)menu).setValueNoUpdate(v);
-						((NumericMenuItem)menu).notifyActionPerformed(new ActionEvent(menu, ActionEvent.ACTION_PERFORMED, menu.getID()));
-					}
-				}
-			}
+            switch (eventType) {
+                case LCD.EVENT_SELECT:
+                    if (menu instanceof ActionMenuItem) {
+                        ((ActionMenuItem) menu).notifyActionPerformed(new ActionEvent(menu, ActionEvent.ACTION_PERFORMED, menu.getID()));
+                    }
+                    break;
+                case LCD.EVENT_UPDATE:
+                    if (menu instanceof CheckboxMenuItem) {
+                        if ("on".equals(value)) {
+                            ((CheckboxMenuItem) menu).setValueNoUpdate(CheckboxValue.On);
+                        } else if ("off".equals(value)) {
+                            ((CheckboxMenuItem) menu).setValueNoUpdate(CheckboxValue.Off);
+                        } else if ("gray".equals(value)) {
+                            ((CheckboxMenuItem) menu).setValueNoUpdate(CheckboxValue.Gray);
+                        }
+                        ((CheckboxMenuItem) menu).notifyActionPerformed(new ActionEvent(menu, ActionEvent.ACTION_PERFORMED, menu.getID()));
+                    } else if (menu instanceof RingMenuItem) {
+                        ((RingMenuItem) menu).setValueNoUpdate(Integer.parseInt(value));
+                        ((RingMenuItem) menu).notifyActionPerformed(new ActionEvent(menu, ActionEvent.ACTION_PERFORMED, menu.getID()));
+                    } else if (menu instanceof NumericMenuItem) {
+                        ((NumericMenuItem) menu).setValueNoUpdate(Integer.parseInt(value));
+                        ((NumericMenuItem) menu).notifyActionPerformed(new ActionEvent(menu, ActionEvent.ACTION_PERFORMED, menu.getID()));
+                    } else if (menu instanceof AlphaMenuItem) {
+                        ((AlphaMenuItem) menu).setValueNoUpdate(value);
+                        ((AlphaMenuItem) menu).notifyActionPerformed(new ActionEvent(menu, ActionEvent.ACTION_PERFORMED, menu.getID()));
+                    } else if (menu instanceof IpMenuItem) {
+                        ((IpMenuItem) menu).setValueNoUpdate(value);
+                        ((IpMenuItem) menu).notifyActionPerformed(new ActionEvent(menu, ActionEvent.ACTION_PERFORMED, menu.getID()));
+                    }
+                    break;
+                case LCD.EVENT_PLUS:
+                case LCD.EVENT_MINUS:
+                    if (menu instanceof SliderMenuItem) {
+                        int v = Integer.parseInt(value);
+                        if (v != ((SliderMenuItem) menu).getValue()) {
+                            ((SliderMenuItem) menu).setValueNoUpdate(v);
+                            ((NumericMenuItem) menu).notifyActionPerformed(new ActionEvent(menu, ActionEvent.ACTION_PERFORMED, menu.getID()));
+                        }
+                    }
+                    break;
+            }
 		}
 	}
 
@@ -535,7 +540,7 @@ public class LCD implements LCDListener
      */
     protected synchronized void addScreen(Screen screen)
     {
-        Integer id = new Integer(screen.getId());
+        Integer id = screen.getId();
         if (!_screens.containsKey(id))
         {
             _screens.put(id, screen);
@@ -550,7 +555,7 @@ public class LCD implements LCDListener
      */
     protected synchronized void updateScreen(Screen screen)
     {
-        Integer id = new Integer(screen.getId());
+        Integer id = screen.getId();
         if (_screens.containsKey(id))
         {
             write(LCD.CMD_SCREEN_SET + screen.getData());
@@ -575,7 +580,7 @@ public class LCD implements LCDListener
     protected synchronized Screen removeScreen(int screenId)
     {
         write(CMD_SCREEN_DEL + screenId);
-        return (Screen)_screens.remove(new Integer(screenId));
+        return _screens.remove(screenId);
     }
 
 	public Submenu getRootMenu() {
