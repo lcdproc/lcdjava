@@ -54,11 +54,6 @@ public class LCDSocketPoller extends Thread
     private String _lastLine;
 
     /**
-     * Flag that tracks if we are alive or not.
-     */
-    private boolean _alive = true;
-
-    /**
      * The listener to notify of listen/ignore events.
      */
     private LCDListener _listener;
@@ -81,7 +76,7 @@ public class LCDSocketPoller extends Thread
     @Override
     public void run()
     {
-        while (_alive)
+        while (!interrupted())
         {
             try {
                 if (!_in.ready()) {
@@ -125,7 +120,7 @@ public class LCDSocketPoller extends Thread
             }
             catch (InterruptedException e)
             {
-                _log.debug("Interrupted");
+                interrupt();
             }
             catch (IOException e)
             {
@@ -146,13 +141,5 @@ public class LCDSocketPoller extends Thread
         String ret = _lastLine;
         _lastLine = null;
         return ret;
-    }
-
-    /**
-     * Tell this thread to die gracefully.
-     */
-    public void shutdown()
-    {
-        _alive = false;
     }
 }

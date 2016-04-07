@@ -459,7 +459,7 @@ public class LCD implements LCDListener
         _log.debug("Shutdown requested");
         if (_poller != null)
         {
-            _poller.shutdown();
+            _poller.interrupt();
             _log.debug("Waiting for LCDSocketPoller to terminate...");
             try {
                 _poller.join();
