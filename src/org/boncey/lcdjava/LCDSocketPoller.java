@@ -136,7 +136,7 @@ public class LCDSocketPoller extends Thread
      * <p>Calling this clears the last line received.
      * @return the last line received.
      */
-    public synchronized String getLastLine()
+    synchronized String getLastLine()
     {
         String ret = _lastLine;
         _lastLine = null;

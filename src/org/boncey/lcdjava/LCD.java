@@ -31,7 +31,7 @@ public class LCD implements LCDListener
     /**
      * Logger for log4j.
      */
-    private static Logger _log = Logger.getLogger(LCD.class);
+    private static final Logger _log = Logger.getLogger(LCD.class);
 
     /**
      * How often to poll for changes.
@@ -41,7 +41,7 @@ public class LCD implements LCDListener
     /**
      * How many times to poll the server before giving up.
      */
-    public static final int POLL_REPEAT = 30;
+    private static final int POLL_REPEAT = 30;
 
     /**
      * The pattern for matching a grouping of one or more numbers and .
@@ -89,22 +89,22 @@ public class LCD implements LCDListener
     /**
      * The command to send to the server to identify ourselves.
      */
-    public static final String CMD_CLIENT_SET = "client_set -name ";
+    private static final String CMD_CLIENT_SET = "client_set -name ";
 
     /**
      * The command to send to the server to add a Screen.
      */
-    public static final String CMD_SCREEN_ADD = "screen_add ";
+    private static final String CMD_SCREEN_ADD = "screen_add ";
 
     /**
      * The command to send to the server to set (modify) a Screen.
      */
-    public static final String CMD_SCREEN_SET = "screen_set ";
+    private static final String CMD_SCREEN_SET = "screen_set ";
 
     /**
      * The command to send to the server to remove a Screen.
      */
-    public static final String CMD_SCREEN_DEL = "screen_del ";
+    private static final String CMD_SCREEN_DEL = "screen_del ";
 
     /**
      * The command to send to the server to add a Widget.
@@ -144,27 +144,27 @@ public class LCD implements LCDListener
     /**
      * The response from LCDd that indicates an action menu item was selected.
      */
-    public static final String EVENT_SELECT = "select";
+    private static final String EVENT_SELECT = "select";
 
     /**
      * The response from LCDd that indicates an menu item was updated.
      */
-    public static final String EVENT_UPDATE = "update";
+    private static final String EVENT_UPDATE = "update";
 
     /**
      * The response from LCDd that indicates a slider was moved to the right.
      */
-    public static final String EVENT_PLUS = "plus";
+    private static final String EVENT_PLUS = "plus";
 
     /**
      * The response from LCDd that indicates a slider was moved to the left.
      */
-    public static final String EVENT_MINUS = "minus";
+    private static final String EVENT_MINUS = "minus";
 
     /**
      * The protocol version that we know how to deal with.
      */
-    public static final String PROTOCOL_VERSION = "0.3";
+    private static final String PROTOCOL_VERSION = "0.3";
 
     /**
      * This is the maximum data that can be sent at once.
@@ -234,7 +234,7 @@ public class LCD implements LCDListener
     /**
      * The Map of Screens, indexed by the Screen id.
      */
-    private Map<Integer, Screen> _screens;
+    private final Map<Integer, Screen> _screens;
 
     /**
      * The count of screens we have created.
@@ -245,7 +245,7 @@ public class LCD implements LCDListener
     /**
      * The root of the client's menu
      */
-    private Submenu _rootMenu;
+    private final Submenu _rootMenu;
 
     /**
      * Public constructor.
