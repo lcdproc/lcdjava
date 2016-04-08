@@ -205,7 +205,7 @@ public class RSSIdler extends AbstractIdler
                 _text = text.toString();
             }
 
-            if (pubDate != null && _expires != -1)
+            if (_expires != -1)
             {
                 Calendar feedCal = Calendar.getInstance();
                 feedCal.setTime(pubDate);

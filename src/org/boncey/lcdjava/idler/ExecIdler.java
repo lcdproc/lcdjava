@@ -39,7 +39,7 @@ public class ExecIdler extends AbstractIdler
     /** 
      * The text to display.
      */
-    private StringBuffer _text = new StringBuffer();
+    private final StringBuffer _text = new StringBuffer();
 
     /** 
      * The name of the program to execute.

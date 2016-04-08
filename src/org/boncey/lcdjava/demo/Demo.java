@@ -77,7 +77,7 @@ public class Demo
 
         try
         {
-            Demo demo = new Demo(host, port);
+            new Demo(host, port);
         }
         catch (LCDException e)
         {

@@ -31,25 +31,25 @@ public class LCD implements LCDListener
     /**
      * Logger for log4j.
      */
-    private static Logger _log = Logger.getLogger(LCD.class);
+    private static final Logger _log = Logger.getLogger(LCD.class);
 
-    /** 
+    /**
      * How often to poll for changes.
      */
     private static final int POLL = 100;
 
-    /** 
+    /**
      * How many times to poll the server before giving up.
      */
-    public static final int POLL_REPEAT = 30;
+    private static final int POLL_REPEAT = 30;
 
-    /** 
+    /**
      * The pattern for matching a grouping of one or more numbers and .
      * characters.
      */
     private static final String PATTERN_NUMERIC = "([\\d\\.]+)";
 
-    /** 
+    /**
      * The pattern for matching the server version.
      * <p>All numeric for stable, text for CVS version.
      */
@@ -66,107 +66,107 @@ public class LCD implements LCDListener
         " cellwid " + PATTERN_NUMERIC +
         " cellhgt " + PATTERN_NUMERIC;
 
-    /** 
+    /**
      * The response from LCDd that indicates it didn't understand our command.
      */
     public static final String RESPONSE_ERROR = "huh?";
 
-    /** 
+    /**
      * The response from LCDd that indicates it is listening to a Screen.
      */
     public static final String RESPONSE_IGNORE = "ignore";
 
-    /** 
+    /**
      * The response from LCDd that indicates it is ignoring a Screen.
      */
     public static final String RESPONSE_LISTEN = "listen";
 
-    /** 
+    /**
      * The command to send to the server to initiate communication.
      */
     private static final String CMD_INIT = "hello";
 
-    /** 
+    /**
      * The command to send to the server to identify ourselves.
      */
-    public static final String CMD_CLIENT_SET = "client_set -name ";
+    private static final String CMD_CLIENT_SET = "client_set -name ";
 
-    /** 
+    /**
      * The command to send to the server to add a Screen.
      */
-    public static final String CMD_SCREEN_ADD = "screen_add ";
+    private static final String CMD_SCREEN_ADD = "screen_add ";
 
-    /** 
+    /**
      * The command to send to the server to set (modify) a Screen.
      */
-    public static final String CMD_SCREEN_SET = "screen_set ";
+    private static final String CMD_SCREEN_SET = "screen_set ";
 
-    /** 
+    /**
      * The command to send to the server to remove a Screen.
      */
-    public static final String CMD_SCREEN_DEL = "screen_del ";
+    private static final String CMD_SCREEN_DEL = "screen_del ";
 
-    /** 
+    /**
      * The command to send to the server to add a Widget.
      */
     public static final String CMD_WIDGET_ADD = "widget_add ";
 
-    /** 
+    /**
      * The command to send to the server to set (modify) a Widget.
      */
     public static final String CMD_WIDGET_SET = "widget_set ";
 
-    /** 
+    /**
      * The command to send to the server to remove a Widget.
      */
     public static final String CMD_WIDGET_DEL = "widget_del ";
 
-    /** 
+    /**
      * The command to send to the server to add a menu item.
      */
     public static final String CMD_MENU_ADD = "menu_add_item ";
 
-    /** 
+    /**
      * The command to send to the server to remove a menu item.
      */
     public static final String CMD_MENU_DEL = "menu_del_item ";
 
-    /** 
+    /**
      * The command to send to the server to set (modify) a MenuItem.
      */
     public static final String CMD_MENU_SET = "menu_set_item ";
 
-    /** 
+    /**
      * The command to send to the server to set a menu as main menu
      */
     public static final String CMD_MENU_SET_MAIN = "menu_set_main ";
-    
-    /** 
+
+    /**
      * The response from LCDd that indicates an action menu item was selected.
      */
-    public static final String EVENT_SELECT = "select";
-    
-    /** 
+    private static final String EVENT_SELECT = "select";
+
+    /**
      * The response from LCDd that indicates an menu item was updated.
      */
-    public static final String EVENT_UPDATE = "update";
+    private static final String EVENT_UPDATE = "update";
 
-    /** 
+    /**
      * The response from LCDd that indicates a slider was moved to the right.
      */
-    public static final String EVENT_PLUS = "plus";
+    private static final String EVENT_PLUS = "plus";
 
-    /** 
+    /**
      * The response from LCDd that indicates a slider was moved to the left.
      */
-    public static final String EVENT_MINUS = "minus";
-    
-    /** 
+    private static final String EVENT_MINUS = "minus";
+
+    /**
      * The protocol version that we know how to deal with.
      */
-    public static final String PROTOCOL_VERSION = "0.3";
+    private static final String PROTOCOL_VERSION = "0.3";
 
-    /** 
+    /**
      * This is the maximum data that can be sent at once.
      * This is calculated from the following code in lcdproc-0.4.5/server/sock.c
      * #define MAXMSG 8192
@@ -179,74 +179,74 @@ public class LCD implements LCDListener
      */
     private static final int MAX_DATA_LENGTH = 7168;
 
-    /** 
+    /**
      * The measurement of a <i>LCD frame</i>, documented as one eight of a
      * second.
      */
     public static final float FRAME = 0.125f;
 
-    /** 
+    /**
      * The Socket used to talk and listen to the LCDd server.
      */
     private Socket _socket;
 
-    /** 
+    /**
      * The Writer we send all data to the server with.
      */
     private BufferedWriter _out;
 
-    /** 
+    /**
      * Thread that listens for responses from the server in a non-blocking
      * manner.
      */
     private LCDSocketPoller _poller;
 
-    /** 
+    /**
      * The software version of LCDd.
      */
     private String _version;
-    
-    /** 
+
+    /**
      * The protocol version.
      */
     private String _protocolVersion;
-    
-    /** 
+
+    /**
      * The width in characters of the LCD device.
      */
     private int _width;
-    
-    /** 
+
+    /**
      * The height in characters of the LCD device.
      */
     private int _height;
-    
-    /** 
+
+    /**
      * The cell width of the LCD device.
      */
     private int _cellWidth;
-    
-    /** 
+
+    /**
      * The cell height of the LCD device.
      */
     private int _cellHeight;
 
-    /** 
+    /**
      * The Map of Screens, indexed by the Screen id.
      */
-    private Map _screens;
+    private final Map<Integer, Screen> _screens;
 
-    /** 
+    /**
      * The count of screens we have created.
      * <p>This is used internally to ensure Screens have unique ids.
      */
     private int _screenCounter;
 
-    /** 
+    /**
      * The root of the client's menu
      */
-    private Submenu _rootMenu;
-    
+    private final Submenu _rootMenu;
+
     /**
      * Public constructor.
      * @param host the LCDd host.
@@ -258,7 +258,7 @@ public class LCD implements LCDListener
     {
     	this(host, port, "lcdjava/1.0");
     }
-    
+
     /**
      * Public constructor.
      * @param host the LCDd host.
@@ -269,7 +269,7 @@ public class LCD implements LCDListener
     public LCD(String host, int port, String clientName)
         throws LCDException
     {
-        _screens = new HashMap();
+        _screens = new HashMap<>();
         _rootMenu = new Submenu(this);
 
         try
@@ -311,7 +311,7 @@ public class LCD implements LCDListener
     {
         return _version;
     }
-    
+
 
     /**
      * Get the protocolVersion.
@@ -321,7 +321,7 @@ public class LCD implements LCDListener
     {
         return _protocolVersion;
     }
-    
+
 
     /**
      * Get the width.
@@ -331,7 +331,7 @@ public class LCD implements LCDListener
     {
         return _width;
     }
-    
+
 
     /**
      * Get the height.
@@ -341,7 +341,7 @@ public class LCD implements LCDListener
     {
         return _height;
     }
-    
+
 
     /**
      * Get the cellWidth.
@@ -351,7 +351,7 @@ public class LCD implements LCDListener
     {
         return _cellWidth;
     }
-    
+
 
     /**
      * Get the cellHeight.
@@ -362,7 +362,7 @@ public class LCD implements LCDListener
         return _cellHeight;
     }
 
-    /** 
+    /**
      * The listen/ignore state of a Screen has been notified to us by LCDd.
      * @param screenId the id of the Screen.
      * @param listening <code>true</code> if the server is listening to us,
@@ -370,7 +370,7 @@ public class LCD implements LCDListener
      */
     public void setListenStatus(int screenId, boolean listening)
     {
-        Screen screen = (Screen)_screens.get(new Integer(screenId));
+        Screen screen = _screens.get(screenId);
         if (screen != null)
         {
             screen.setListening(listening);
@@ -384,10 +384,10 @@ public class LCD implements LCDListener
         }
     }
 
-    /** 
+    /**
      * The user interacted with a menu
      * @param menuId the id of the menu item.
-     * @param eventType the type of the event that occured
+     * @param eventType the type of the event that occurred
      * @param value the value returned or <code>null</code>when not available
      */
     @Override
@@ -410,63 +410,72 @@ public class LCD implements LCDListener
 			}
 		}
 		if (menu != null) {
-			if (eventType.equals(LCD.EVENT_SELECT)) {
-				if (menu instanceof ActionMenuItem) {
-					((ActionMenuItem)menu).notifyActionPerformed(new ActionEvent(menu, ActionEvent.ACTION_PERFORMED, menu.getID()));
-				}
-			} else if (eventType.equals(LCD.EVENT_UPDATE)) {
-				if (menu instanceof CheckboxMenuItem) {
-					if ("on".equals(value)) {
-						((CheckboxMenuItem)menu).setValueNoUpdate(CheckboxValue.On);
-					} else if ("off".equals(value)) {
-						((CheckboxMenuItem)menu).setValueNoUpdate(CheckboxValue.Off);
-					} else if ("gray".equals(value)) {
-						((CheckboxMenuItem)menu).setValueNoUpdate(CheckboxValue.Gray);
-					}
-					((CheckboxMenuItem)menu).notifyActionPerformed(new ActionEvent(menu, ActionEvent.ACTION_PERFORMED, menu.getID()));
-				} else if (menu instanceof RingMenuItem) {
-					((RingMenuItem)menu).setValueNoUpdate(Integer.parseInt(value));
-					((RingMenuItem)menu).notifyActionPerformed(new ActionEvent(menu, ActionEvent.ACTION_PERFORMED, menu.getID()));
-				} else if (menu instanceof NumericMenuItem) {
-					((NumericMenuItem)menu).setValueNoUpdate(Integer.parseInt(value));
-					((NumericMenuItem)menu).notifyActionPerformed(new ActionEvent(menu, ActionEvent.ACTION_PERFORMED, menu.getID()));
-				} else if (menu instanceof AlphaMenuItem) {
-					((AlphaMenuItem)menu).setValueNoUpdate(value);
-					((AlphaMenuItem)menu).notifyActionPerformed(new ActionEvent(menu, ActionEvent.ACTION_PERFORMED, menu.getID()));
-				} else if (menu instanceof IpMenuItem) {
-					((IpMenuItem)menu).setValueNoUpdate(value);
-					((IpMenuItem)menu).notifyActionPerformed(new ActionEvent(menu, ActionEvent.ACTION_PERFORMED, menu.getID()));
-				}
-			} else if (eventType.equals(LCD.EVENT_PLUS) || eventType.equals(LCD.EVENT_MINUS)) {
-				if (menu instanceof SliderMenuItem) {
-					int v = Integer.parseInt(value);
-					if (v != ((SliderMenuItem)menu).getValue()) {
-						((SliderMenuItem)menu).setValueNoUpdate(v);
-						((NumericMenuItem)menu).notifyActionPerformed(new ActionEvent(menu, ActionEvent.ACTION_PERFORMED, menu.getID()));
-					}
-				}
-			}
+            switch (eventType) {
+                case LCD.EVENT_SELECT:
+                    if (menu instanceof ActionMenuItem) {
+                        ((ActionMenuItem) menu).notifyActionPerformed(new ActionEvent(menu, ActionEvent.ACTION_PERFORMED, menu.getID()));
+                    }
+                    break;
+                case LCD.EVENT_UPDATE:
+                    if (menu instanceof CheckboxMenuItem) {
+                        if ("on".equals(value)) {
+                            ((CheckboxMenuItem) menu).setValueNoUpdate(CheckboxValue.On);
+                        } else if ("off".equals(value)) {
+                            ((CheckboxMenuItem) menu).setValueNoUpdate(CheckboxValue.Off);
+                        } else if ("gray".equals(value)) {
+                            ((CheckboxMenuItem) menu).setValueNoUpdate(CheckboxValue.Gray);
+                        }
+                        ((CheckboxMenuItem) menu).notifyActionPerformed(new ActionEvent(menu, ActionEvent.ACTION_PERFORMED, menu.getID()));
+                    } else if (menu instanceof RingMenuItem) {
+                        ((RingMenuItem) menu).setValueNoUpdate(Integer.parseInt(value));
+                        ((RingMenuItem) menu).notifyActionPerformed(new ActionEvent(menu, ActionEvent.ACTION_PERFORMED, menu.getID()));
+                    } else if (menu instanceof NumericMenuItem) {
+                        ((NumericMenuItem) menu).setValueNoUpdate(Integer.parseInt(value));
+                        ((NumericMenuItem) menu).notifyActionPerformed(new ActionEvent(menu, ActionEvent.ACTION_PERFORMED, menu.getID()));
+                    } else if (menu instanceof AlphaMenuItem) {
+                        ((AlphaMenuItem) menu).setValueNoUpdate(value);
+                        ((AlphaMenuItem) menu).notifyActionPerformed(new ActionEvent(menu, ActionEvent.ACTION_PERFORMED, menu.getID()));
+                    } else if (menu instanceof IpMenuItem) {
+                        ((IpMenuItem) menu).setValueNoUpdate(value);
+                        ((IpMenuItem) menu).notifyActionPerformed(new ActionEvent(menu, ActionEvent.ACTION_PERFORMED, menu.getID()));
+                    }
+                    break;
+                case LCD.EVENT_PLUS:
+                case LCD.EVENT_MINUS:
+                    if (menu instanceof SliderMenuItem) {
+                        int v = Integer.parseInt(value);
+                        if (v != ((SliderMenuItem) menu).getValue()) {
+                            ((SliderMenuItem) menu).setValueNoUpdate(v);
+                            ((NumericMenuItem) menu).notifyActionPerformed(new ActionEvent(menu, ActionEvent.ACTION_PERFORMED, menu.getID()));
+                        }
+                    }
+                    break;
+            }
 		}
 	}
-    
-    /** 
+
+    /**
      * Shut down the server, terminating any threads.
      * @throws LCDException in case of a network problem.
      */
     public void shutdown()
         throws LCDException
     {
+        _log.debug("Shutdown requested");
         if (_poller != null)
         {
-            _poller.shutdown();
-            while (_poller.isPolling())
-            {
-                // loop until LCDSocketPoller has stopped polling
+            _poller.interrupt();
+            _log.debug("Waiting for LCDSocketPoller to terminate...");
+            try {
+                _poller.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
 
         try
         {
+            _log.debug("Closing socket");
             if (_socket != null && !_socket.isClosed())
             {
                 _socket.close();
@@ -478,9 +487,9 @@ public class LCD implements LCDListener
         }
     }
 
-    /** 
+    /**
      * Construct a new (unactivated) Screen.
-     * @param name the Screeen name.
+     * @param name the Screen name.
      * @return the newly constructed Screen.
      */
     public synchronized Screen constructScreen(String name)
@@ -488,9 +497,9 @@ public class LCD implements LCDListener
         return constructScreen(name, Screen.PRIORITY_HIDDEN);
     }
 
-    /** 
+    /**
      * Construct a new (unactivated) Screen.
-     * @param name the Screeen name.
+     * @param name the Screen name.
      * @param priority the screen priority.
      * @return the newly constructed Screen.
      */
@@ -499,9 +508,9 @@ public class LCD implements LCDListener
         return constructScreen(name, priority, false);
     }
 
-    /** 
+    /**
      * Construct and optionally activate a new Screen.
-     * @param name the Screeen name.
+     * @param name the Screen name.
      * @param priority the screen priority.
      * @param activate <code>true</code> to activate this Screen immediately,
      * <code>false</code> to leave in unactivated.
@@ -524,14 +533,14 @@ public class LCD implements LCDListener
         return screen;
     }
 
-    /** 
+    /**
      * Add this screen to the LCD server.
      * <p>There is no need to call this, call {@link Screen#activate()} instead.
      * @param screen the Screen to add.
      */
     protected synchronized void addScreen(Screen screen)
     {
-        Integer id = new Integer(screen.getId());
+        Integer id = screen.getId();
         if (!_screens.containsKey(id))
         {
             _screens.put(id, screen);
@@ -540,20 +549,20 @@ public class LCD implements LCDListener
         }
     }
 
-    /** 
+    /**
      * Update this screen to the LCD server.
      * @param screen the Screen to update.
      */
     protected synchronized void updateScreen(Screen screen)
     {
-        Integer id = new Integer(screen.getId());
+        Integer id = screen.getId();
         if (_screens.containsKey(id))
         {
             write(LCD.CMD_SCREEN_SET + screen.getData());
         }
     }
 
-    /** 
+    /**
      * Remove a Screen from the server.
      * @param screen the Screen to remove.
      * @return the removed Screen, or null if not removed.
@@ -563,7 +572,7 @@ public class LCD implements LCDListener
         return removeScreen(screen.getId());
     }
 
-    /** 
+    /**
      * Remove a Screen from the server.
      * @param screenId the Screen id to remove.
      * @return the removed Screen, or null if not removed.
@@ -571,14 +580,14 @@ public class LCD implements LCDListener
     protected synchronized Screen removeScreen(int screenId)
     {
         write(CMD_SCREEN_DEL + screenId);
-        return (Screen)_screens.remove(new Integer(screenId));
+        return _screens.remove(screenId);
     }
 
 	public Submenu getRootMenu() {
 		return _rootMenu;
 	}
-    
-    /** 
+
+    /**
      * Parse the init string and split up into groups.
      * @param init the init string.
      * @throws LCDException if the protocol version is one we don't know about.
@@ -610,7 +619,7 @@ public class LCD implements LCDListener
         }
     }
 
-    /** 
+    /**
      * Connect to the LCDd server.
      * @param host the hostname to connect to.
      * @param port the port to connect to.
@@ -627,8 +636,7 @@ public class LCD implements LCDListener
         _out = new BufferedWriter(new OutputStreamWriter(
                     _socket.getOutputStream()));
         _poller = new LCDSocketPoller(in, this);
-        Thread t = new Thread(_poller);
-        t.start();
+        _poller.start();
 
         write(CMD_INIT);
         String response = null;
@@ -653,7 +661,7 @@ public class LCD implements LCDListener
         return response;
     }
 
-    /** 
+    /**
      * Write the data to the server.
      * @param text the text to write.
      */
@@ -673,7 +681,7 @@ public class LCD implements LCDListener
         }
         catch (IOException e)
         {
-            e.printStackTrace();
+            throw new LCDException(e);
         }
     }
 

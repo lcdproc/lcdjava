@@ -96,7 +96,7 @@ public class Screen
     /** 
      * A Map of Widgets added to this Screen.
      */
-    private Map _widgets;
+    private Map<Integer, Widget> _widgets;
 
     /** 
      * The count of widgets we have created.
@@ -151,7 +151,7 @@ public class Screen
         _lcd = lcd;
         _id = id;
         _name = name;
-        _widgets = new HashMap();
+        _widgets = new HashMap<>();
     }
 
     /**
@@ -431,7 +431,7 @@ public class Screen
     public synchronized Widget constructWidget(String type)
         throws LCDException
     {
-        Widget widget = null;
+        Widget widget;
 
         if (type.equals(Widget.WIDGET_TITLE))
         {

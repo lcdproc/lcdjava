@@ -7,33 +7,22 @@
 <project name="LcdJava" default="build" basedir="./">
 
     <property environment="env"/>
-    <property name="Name" value="${env.PROJECT}"/>
 
-    <property name="project" value="${env.PROJECT}"/>
-    <property name="workdir" value="${env.WORKDIR}"/>
-    <property name="server" value="${env.SERVER}"/>
-    <property name="jlirc.classes" value="${env.JLIRC_HOME}/build"/>
-    <property name="source" value="src"/>
+    <property name="project" value="lcdjava"/>
 
-    <property name="project.root" value="${workdir}/${project}"/>
-    <property name="project.source" value="${project.root}/${source}"/>
-    <property name="project.classes" value="${project.root}/build/classes"/>
-    <property name="project.lib" value="${project.root}/build/lib"/>
-    <property name="project.javadocs" value="${project.root}/docs"/>
+    <property name="project.source" value="src"/>
+    <property name="project.classes" value="build/classes"/>
+    <property name="project.lib" value="build/lib"/>
+    <property name="project.javadocs" value="docs"/>
 
     <!-- required for javadoc to split by package -->
     <property name="lcdjava" value="org.boncey.lcdjava.*"/>
 
     <path id="classpath">
-        <pathelement path="${classpath}" />
         <fileset dir="${project.lib}">
             <include name="**/*.jar" />
             <include name="**/*.zip" />
         </fileset>
-        <pathelement path="${jlirc.classes}" />
-
-        <!-- doclint jar -->
-        <pathelement location="${doclint.jar}"/>
     </path>
 
     <target name="build" depends="compile">
@@ -47,10 +36,12 @@
                 destdir="${project.classes}"
                 debug="on"
                 deprecation="on"
-                source="1.4"
+                source="1.8"
                 optimize="on"
-                excludes="**/generated/**">
+                excludes="**/generated/**"
+                includeantruntime="false">
             <classpath refid="classpath" />
+            <compilerarg value="-Xlint:unchecked" />
         </javac>
     </target>
 
@@ -63,11 +54,11 @@
                 version="true"
                 private="true"
                 use="true"
-                windowtitle="${Name} API"
-                doctitle="${Name}"
+                windowtitle="${project} API"
+                doctitle="${project}"
                 bottom="Copyright &#169; 2004-2005 Darren Greaves."
                 additionalparam="-linksource"
-                source="1.4"
+                source="1.8"
             >
             <classpath refid="classpath" />
             <group title="LcdJava" packages="${lcdjava}"/>

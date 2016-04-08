@@ -85,7 +85,7 @@ public class Submenu extends AbstractMenuItem
     public MenuItem constructMenuItem(String type)
         throws LCDException
     {
-        MenuItem item = null;
+        MenuItem item;
 
         synchronized (this) {
 	        if (type.equals(MenuItem.MENUITEM_MENU))
