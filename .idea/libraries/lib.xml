@@ -4,7 +4,6 @@
       <root url="jar://$PROJECT_DIR$/build/lib/log4j-1.2.6.jar!/" />
       <root url="jar://$PROJECT_DIR$/build/lib/rome-fetcher-0.4.jar!/" />
       <root url="jar://$PROJECT_DIR$/build/lib/rome-0.4.jar!/" />
-      <root url="jar://$PROJECT_DIR$/build/lib/jdom.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
