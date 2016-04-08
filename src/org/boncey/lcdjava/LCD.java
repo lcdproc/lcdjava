@@ -681,7 +681,7 @@ public class LCD implements LCDListener
         }
         catch (IOException e)
         {
-            e.printStackTrace();
+            throw new LCDException(e);
         }
     }
 
