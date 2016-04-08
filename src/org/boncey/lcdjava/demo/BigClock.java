@@ -8,9 +8,9 @@ import java.util.Calendar;
 /**
  * This demo shows a clock with blinking colons on an LCD using LCDproc "big numbers", similar to the BigClock (K) demo
  * in the lcdproc official client.
- *
+ * <p>
  * If the display is at least 20 characters wide it shows the seconds as well, otherwise just hours and minutes.
- *
+ * <p>
  * Tested on 16x2, 20x2 and 20x4 HD44780 compatible displays.
  */
 public class BigClock extends Thread {
