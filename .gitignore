@@ -14,8 +14,4 @@ hs_err_pid*
 /.idea
 lcdjava.iml
 
-# Generated Javadoc
-/docs
-
-# IDEA build target directory
-/out
+/target
