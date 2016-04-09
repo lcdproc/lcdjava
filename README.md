@@ -1,37 +1,28 @@
 Java client for LCDproc (http://lcdproc.org/).
 
 This project was originally created by Darren Greaves in 2004-2008. It has been
-slightly updated in 2016 and builds with JDK 1.8 and Ant 1.9, but still bundles
-ancient libraries and uses fairly old Java style.
+updated in 2016 and builds with JDK 1.8 and Maven 3.3.
 
-To build the project, generate documentation and run the demos:
+To build the project:
 
-    $ ant build
-    $ ant javadocs
-    $ java -cp build/classes:build/lib/log4j-1.2.6.jar org.boncey.lcdjava.demo.Demo <host> <port>
-    $ java -cp build/classes:build/lib/log4j-1.2.6.jar org.boncey.lcdjava.demo.BigClock <host> <port>
+    $ mvn compile
 
-Example:
+To generate documentation:
 
-    $ ant build
-    Buildfile: /home/anton/git/lcdjava/build.xml
+    $ mvn javadoc:javadoc
 
-    compile:
-	[javac] Compiling 40 source files to /home/anton/git/lcdjava/build/classes
+You can also run `mvn site` to generate a full Maven website, including the Javadocs.
 
-    build:
+To package the project (excluding dependencies):
 
-    BUILD SUCCESSFUL
-    Total time: 1 second
-    $ java -cp build/classes:build/lib/log4j-1.2.6.jar org.boncey.lcdjava.demo.BigClock 192.168.1.242 13666
-    Connected to LCDd: Version = 0.5.5; protocol version = 0.3; width = 20; height = 4; cell width = 5; cell height = 8
-    Press Ctrl+C to exit
-    ^C0 [Thread-0] DEBUG org.boncey.lcdjava.demo.BigClock  - Interrupted
-    2 [Thread-0] DEBUG org.boncey.lcdjava.LCD  - Shutdown requested
-    2 [Thread-0] DEBUG org.boncey.lcdjava.LCD  - Waiting for LCDSocketPoller to terminate...
-    2 [Thread-1] DEBUG org.boncey.lcdjava.LCDSocketPoller  - Terminating
-    2 [Thread-0] DEBUG org.boncey.lcdjava.LCD  - Closing socket
-    2 [Thread-0] DEBUG org.boncey.lcdjava.demo.BigClock  - Terminating
+	$ mvn package
+
+To run the demos from the resulting jar, or directly from the compiled class files:
+
+	$ java -cp target/classes:$HOME/.m2/repository/log4j/log4j/1.2.6/log4j-1.2.6.jar org.boncey.lcdjava.demo.Demo <host> <port>
+	$ java -cp target/lcdjava-1.0-SNAPSHOT.jar:$HOME/.m2/repository/log4j/log4j/1.2.6/log4j-1.2.6.jar: org.boncey.lcdjava.demo.Demo <host> <port>
+
+Replace *Demo* with *BigClock* for the other demo.
 
 I used to use this with LCDproc on Linux a few years back but I have stopped
 using it now. I don't even have an LCD display hooked up anymore so am unable to
