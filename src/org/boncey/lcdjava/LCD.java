@@ -300,7 +300,7 @@ public class LCD implements LCDListener
             shutdown();
             throw e;
         }
-
+        _log.debug("Connected");
     }
 
     /**
