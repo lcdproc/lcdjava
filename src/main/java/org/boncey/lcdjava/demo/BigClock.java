@@ -127,7 +127,7 @@ public class BigClock extends Thread {
         String host = args[0];
         int port = Integer.parseInt(args[1]);
 
-        BigClock clock = new BigClock(host, port);
+        final BigClock clock = new BigClock(host, port);
         clock.start();
 
         // Let the clock shut down cleanly on exit
