@@ -1,6 +1,7 @@
 package org.boncey.lcdjava.demo;
 
-import org.apache.log4j.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.boncey.lcdjava.*;
 
 import java.util.Calendar;
@@ -14,7 +15,7 @@ import java.util.Calendar;
  * Tested on 16x2, 20x2 and 20x4 HD44780 compatible displays.
  */
 public class BigClock extends Thread {
-    private static final Logger _log = Logger.getLogger(BigClock.class);
+    private final Logger _log = LogManager.getLogger();
 
     private final LCD lcd;
 
@@ -103,7 +104,7 @@ public class BigClock extends Thread {
                 }
             }
         } catch (InterruptedException e) {
-            _log.debug("Interrupted");
+            //_log.debug("Interrupted");
         } finally {
             // Shut down the LCD both on requested termination (interrupt) and on error
             try {
@@ -112,7 +113,7 @@ public class BigClock extends Thread {
                 e.printStackTrace();
             }
         }
-        _log.debug("Terminating");
+        //_log.debug("Terminating");
     }
 
     public static void main(String args[]) throws Exception {
@@ -121,8 +122,6 @@ public class BigClock extends Thread {
                     "Usage: java org.boncey.lcdjava.demo.BigClock <LCD host> <LCD port>");
             System.exit(1);
         }
-
-        BasicConfigurator.configure();
 
         String host = args[0];
         int port = Integer.parseInt(args[1]);

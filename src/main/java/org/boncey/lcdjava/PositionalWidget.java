@@ -1,6 +1,6 @@
 package org.boncey.lcdjava;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Abstract Widget that deals with x and y dimensions.
@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
  * @author Darren Greaves
  * @version $Id: PositionalWidget.java,v 1.2 2005-03-03 14:13:16 boncey Exp $
  */
-public abstract class PositionalWidget extends AbstractWidget 
+public abstract class PositionalWidget extends AbstractWidget
 {
     /**
      * Version details.
@@ -17,16 +17,11 @@ public abstract class PositionalWidget extends AbstractWidget
         "$Id: PositionalWidget.java,v 1.2 2005-03-03 14:13:16 boncey Exp $";
 
     /**
-     * Logger for log4j.
-     */
-    private static Logger _log = Logger.getLogger(LCD.class);
-
-    /** 
      * The x position.
      */
     private int _x = 1;
 
-    /** 
+    /**
      * The y position.
      */
     private int _y = 1;
@@ -77,7 +72,7 @@ public abstract class PositionalWidget extends AbstractWidget
         return _y;
     }
 
-    /** 
+    /**
      * Return the data this Widget needs to update itself.
      * @return the data to update this Widget.
      */

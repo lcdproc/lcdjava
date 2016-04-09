@@ -5,7 +5,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import org.apache.log4j.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.boncey.lcdjava.LCDException;
 import org.boncey.lcdjava.ScrollerWidget;
 import org.boncey.lcdjava.util.WidgetTimer;
@@ -25,7 +27,7 @@ public class IdlerLoader
     /**
      * Logger for log4j.
      */
-    private static Logger _log = Logger.getLogger(IdlerLoader.class);
+    private static Logger _log = LogManager.getLogger();
 
     /**
      * Version details.
@@ -33,42 +35,42 @@ public class IdlerLoader
     public static final String CVSID =
         "$Id: IdlerLoader.java,v 1.2 2005-03-03 14:13:16 boncey Exp $";
 
-    /** 
+    /**
      * XML config value.
      */
     private static final String IDLER_ELEMENT = "idler";
 
-    /** 
+    /**
      * XML config value.
      */
     private static final String CLASSNAME = "className";
 
-    /** 
+    /**
      * XML config value.
      */
     private static final String NAME = "name";
 
-    /** 
+    /**
      * The amount of milliseconds in a second.
      */
     public static final int ONE_SECOND = 1000;
 
-    /** 
+    /**
      * The amount of seconds in a minute.
      */
     public static final int ONE_MINUTE = 60;
 
-    /** 
+    /**
      * The timer for controlling display of each Idler.
      */
     private WidgetTimer _timer;
 
-    /** 
+    /**
      * The WidgetUpdater that mananges displaying of the Idlers.
      */
     private IdlerWidgetUpdater _updater;
 
-    /** 
+    /**
      * Default constructor, initialise.
      * @param doc the XML Document.
      * @param scroller the Widget to display each Idler upon.
@@ -90,7 +92,7 @@ public class IdlerLoader
         load(config, scroller, name);
     }
 
-    /** 
+    /**
      * Default constructor, initialise.
      * @param config the XML config.
      * @param scroller the Widget to display each Idler upon.
@@ -105,7 +107,7 @@ public class IdlerLoader
         load(config, scroller, name);
     }
 
-    /** 
+    /**
      * Load the Idlers from the config file.
      * @param config the XML config.
      * @param scroller the Widget to display each Idler upon.
@@ -129,7 +131,7 @@ public class IdlerLoader
         }
     }
 
-    /** 
+    /**
      * IdlerLoader is being destroyed, kill off any threads.
      */
     public void destroy()
@@ -148,7 +150,7 @@ public class IdlerLoader
         _updater.updateWidget(_timer);
     }
 
-    /** 
+    /**
      * Load the configs and store the classes in the internal Map.
      * @param config the Element that holds the config.
      * @return a List of Idlers.
@@ -160,7 +162,7 @@ public class IdlerLoader
         List<Idler> idlers = new ArrayList<>();
         NodeList nodes = config.getChildNodes();
 
-        for (int i = 0; i < nodes.getLength(); i++) 
+        for (int i = 0; i < nodes.getLength(); i++)
         {
             Node node = nodes.item(i);
 
@@ -232,7 +234,7 @@ public class IdlerLoader
         return idlers;
     }
 
-    /** 
+    /**
      * Instantiate a new Idler.
      * @param moduleConfig the Element that holds the config.
      * @param name the name of the Idler.

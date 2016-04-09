@@ -1,7 +1,7 @@
 package org.boncey.lcdjava.idler;
 
 import java.util.List;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 import org.boncey.lcdjava.LCD;
 import org.boncey.lcdjava.ScrollerWidget;
 import org.boncey.lcdjava.util.WidgetTimer;
@@ -23,31 +23,26 @@ public class IdlerWidgetUpdater implements WidgetUpdater
         "$Id: IdlerWidgetUpdater.java,v 1.2 2005-03-03 14:13:16 boncey Exp $";
 
     /**
-     * Logger for log4j.
-     */
-    private static Logger _log = Logger.getLogger(IdlerWidgetUpdater.class);
-
-    /** 
      * The ScrollerWidget we will be updating with the idler content.
      */
     private ScrollerWidget _content;
 
-    /** 
+    /**
      * The ScrollerWidget we will be updating with the idler name.
      */
     private ScrollerWidget _name;
 
-    /** 
+    /**
      * The list of Idler objects to update.
      */
     private List _idlers;
 
-    /** 
+    /**
      * The index of the last Idler displayed.
      */
     private int _index = -1;
 
-    /** 
+    /**
      * Store the currently displayed text so we don't update if it hasn't
      * changed (only happens if we have one idler or two identical ones in a
      * row).
@@ -69,7 +64,7 @@ public class IdlerWidgetUpdater implements WidgetUpdater
         _idlers = idlers;
     }
 
-    /** 
+    /**
      * Update the Widget by showing the next Idler.
      * @param timer the WidgetTimer.
      */
@@ -103,7 +98,7 @@ public class IdlerWidgetUpdater implements WidgetUpdater
         }
     }
 
-    /** 
+    /**
      * Retrurn the wrapped Widget.
      * @return the Widget.
      */

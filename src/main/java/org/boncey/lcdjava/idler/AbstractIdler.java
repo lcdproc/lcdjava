@@ -1,6 +1,6 @@
 package org.boncey.lcdjava.idler;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 import org.boncey.lcdjava.LCDException;
 import org.w3c.dom.Element;
 
@@ -19,11 +19,6 @@ public abstract class AbstractIdler implements Idler
         "$Id: AbstractIdler.java,v 1.2 2005-03-03 14:13:16 boncey Exp $";
 
     /**
-     * Logger for log4j.
-     */
-    private static Logger _log = Logger.getLogger(AbstractIdler.class);
-
-    /** 
      * The Idler name.
      */
     private String _name;
@@ -56,7 +51,7 @@ public abstract class AbstractIdler implements Idler
         return "Name = " + _name;
     }
 
-    /** 
+    /**
      * Get the name to display.
      * @return the name to display.
      */

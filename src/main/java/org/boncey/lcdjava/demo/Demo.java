@@ -1,10 +1,6 @@
 package org.boncey.lcdjava.demo;
 
-import org.apache.log4j.Appender;
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.ConsoleAppender;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
+import org.apache.logging.log4j.Logger;
 import org.boncey.lcdjava.LCD;
 import org.boncey.lcdjava.LCDException;
 import org.boncey.lcdjava.Screen;
@@ -70,8 +66,6 @@ public class Demo
             System.exit(-1);
         }
 
-        configureLogging();
-
         String host = args[0];
         int port = Integer.parseInt(args[1]);
 
@@ -83,19 +77,6 @@ public class Demo
         {
             e.printStackTrace();
         }
-    }
-
-    /** 
-     * Configure log4j before we use the logger in this class.
-     */
-    private static void configureLogging()
-    {
-        PatternLayout layout = new PatternLayout(
-                "%m%n");
-        Appender app = new ConsoleAppender(layout);
-        BasicConfigurator.configure(app);
-        
-        _log = Logger.getLogger(Demo.class);
     }
 }
 

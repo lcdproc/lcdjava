@@ -18,7 +18,9 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.apache.log4j.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.boncey.lcdjava.LCDException;
 import org.w3c.dom.Element;
 
@@ -39,60 +41,60 @@ public class RSSIdler extends AbstractIdler
     /**
      * Logger for log4j.
      */
-    private static Logger _log = Logger.getLogger(RSSIdler.class);
+    private static Logger _log = LogManager.getLogger();
 
-    /** 
+    /**
      * Pad the display to enhance readability.
      */
     private static final String PADDING = "  ***  ";
 
-    /** 
+    /**
      * The User Agent for fetching feeds.
      */
     private static final String USER_AGENT =
         "FeedFetcher (Rome Client)/0.1";
 
-    /** 
+    /**
      * The text to display.
      */
     private String _text = "";
 
-    /** 
+    /**
      * The feed URL.
      */
     private URL _feed;
 
-    /** 
+    /**
      * Does this Idler have anything to display?
      */
     private boolean _valid;
 
-    /** 
+    /**
      * How often to update this feed in minutes.
      */
     private int _update;
 
-    /** 
+    /**
      * Limit the number of entries to this number.
      * Will only show the first 'n' entries if set, otherwise shows all.
      */
     private int _limit = -1;
 
-    /** 
+    /**
      * How many minutes old this feed has to be before we stop displaying it?
      * <p>The feed will continue to be checked in the background so will
      * re-appear when it has been updated.
      */
     private int _expires = -1;
 
-    /** 
+    /**
      * Whether or not to display the feed's description field.
      * <p>False unless specified as <code>includeDescription="true"</code> in
      * the config.
      */
     private boolean _includeDescription;
 
-    /** 
+    /**
      * Any entry matching this pattern will be ignored.
      * <p>Example: <code>ignoreEntryPattern=".*advert.*"</code> to skip ads.
      */
@@ -140,7 +142,7 @@ public class RSSIdler extends AbstractIdler
             RSSUpdater updater = new RSSUpdater();
             Thread thread = new Thread(updater);
             thread.start();
-            
+
         }
         catch (MalformedURLException e)
         {
@@ -148,7 +150,7 @@ public class RSSIdler extends AbstractIdler
         }
     }
 
-    /** 
+    /**
      * Re-read the feed from the given URL.
      * @return <code>true</code> if success, <code>false</code> otherwise.
      */
@@ -243,7 +245,7 @@ public class RSSIdler extends AbstractIdler
         return success;
     }
 
-    /** 
+    /**
      * Is there any text to display?
      * @return <code>true</code> if there is anything to display,
      * <code>false</code> otherwise.
@@ -253,7 +255,7 @@ public class RSSIdler extends AbstractIdler
         return _valid;
     }
 
-    /** 
+    /**
      * Get the text to display.
      * @return the text to display.
      */
@@ -277,8 +279,8 @@ public class RSSIdler extends AbstractIdler
     {
         return "Feed = " + _feed + "; Valid = " + _valid;
     }
-    
-    /** 
+
+    /**
      * Thread for handling periodic updates.
      * @author Darren Greaves
      */
@@ -291,7 +293,7 @@ public class RSSIdler extends AbstractIdler
         {
         }
 
-        /** 
+        /**
          * Update the feed.
          */
         public void run()

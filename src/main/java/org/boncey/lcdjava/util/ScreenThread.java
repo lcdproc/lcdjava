@@ -3,7 +3,7 @@ package org.boncey.lcdjava.util;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 import org.boncey.lcdjava.Screen;
 
 /**
@@ -21,52 +21,47 @@ public class ScreenThread implements Runnable
         "$Id: ScreenThread.java,v 1.2 2005-03-03 14:13:16 boncey Exp $";
 
     /**
-     * Logger for log4j.
-     */
-    private static Logger _log = Logger.getLogger(ScreenThread.class);
-
-    /** 
      * The screen we are displaying.
      */
     private Screen _screen;
 
-    /** 
+    /**
      * How long to display the screen for.
      */
     private int _timeout;
 
-    /** 
+    /**
      * The priority to set when displaying.
      */
     private String _priority;
 
-    /** 
+    /**
      * Flag that tracks if we are displaying or not.
      */
     private boolean _displaying;
 
-    /** 
+    /**
      * Flag that tracks if we are alive or not.
      */
     private boolean _alive = true;
 
-    /** 
+    /**
      * Flag that tracks whether we should die after the first timeout or not.
      */
     private boolean _dieOnTimeout;
 
-    /** 
+    /**
      * A List of TimeoutHook objects that want to be notified when the thread
      * times out.
      */
     private List<TimeoutHook> _timeoutHooks;
 
-    /** 
+    /**
      * How many times to count down before calling stop.
      */
     private int _step;
 
-    /** 
+    /**
      * How often to poll for changes.
      */
     private static final int POLL = 100;
@@ -102,7 +97,7 @@ public class ScreenThread implements Runnable
         this(screen, timeout, priority, false);
     }
 
-    /** 
+    /**
      * Add a TimeoutHook object.
      * @param hook the TimeoutHook.
      */
@@ -111,7 +106,7 @@ public class ScreenThread implements Runnable
         _timeoutHooks.add(hook);
     }
 
-    /** 
+    /**
      * Remove a TimeoutHook object.
      * @param hook the TimeoutHook.
      * @return <code>true</code> if the TimeoutHook was removed,
@@ -122,7 +117,7 @@ public class ScreenThread implements Runnable
         return _timeoutHooks.remove(hook);
     }
 
-    /** 
+    /**
      * Switch to the specified priority for the specified time period.
      */
     public void run()
@@ -159,7 +154,7 @@ public class ScreenThread implements Runnable
         }
     }
 
-    /** 
+    /**
      * Switch to the specified priority (display the screen).
      */
     private void start()
@@ -167,7 +162,7 @@ public class ScreenThread implements Runnable
         _screen.setPriority(_priority);
     }
 
-    /** 
+    /**
      * Set counter to zero then hide the screen.
      * <p>This triggers a timeout and any TimeoutHooks are notified.
      */
@@ -177,7 +172,7 @@ public class ScreenThread implements Runnable
         hide();
     }
 
-    /** 
+    /**
      * Switch to the hidden priority (hide the screen).
      * <p>Explicitly hide the screen without triggering a timeout.
      */
@@ -187,7 +182,7 @@ public class ScreenThread implements Runnable
         _screen.setPriority(Screen.PRIORITY_HIDDEN);
     }
 
-    /** 
+    /**
      * Tell this thread to die gracefully.
      */
     public void destroy()
@@ -195,7 +190,7 @@ public class ScreenThread implements Runnable
         _alive = false;
     }
 
-    /** 
+    /**
      * Are we displaying now?
      * @return <code>true</code> if displaying, <code>false</code> otherwise.
      */
@@ -204,7 +199,7 @@ public class ScreenThread implements Runnable
         return _displaying;
     }
 
-    /** 
+    /**
      * Tell the screen to display for the specified timeout.
      */
     public void display()
@@ -213,7 +208,7 @@ public class ScreenThread implements Runnable
         _displaying = true;
     }
 
-    /** 
+    /**
      * Get the Screen we are wrapping.
      * @return the Screen we are wrapping.
      */
@@ -222,7 +217,7 @@ public class ScreenThread implements Runnable
         return _screen;
     }
 
-    /** 
+    /**
      * Call timeout for each TimeoutHook.
      */
     private void timeout()
@@ -251,7 +246,7 @@ public class ScreenThread implements Runnable
                "; screen = " + _screen;
     }
 
-    /** 
+    /**
      * Determine if this ScreenThread is equal to the passed in Object.
      * <p>They are considered equal if the passed in Object is not null and is a
      * ScreenThread object that has the same Screen, priority and timeout value
@@ -276,7 +271,7 @@ public class ScreenThread implements Runnable
         return equal;
     }
 
-    /** 
+    /**
      * Return the hash code for this ScreenThread.
      * <p>The hash is generated from a String representation of the Screen,
      * priority and timeout value.

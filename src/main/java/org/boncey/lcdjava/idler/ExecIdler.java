@@ -3,7 +3,9 @@ package org.boncey.lcdjava.idler;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
-import org.apache.log4j.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.boncey.lcdjava.LCDException;
 import org.w3c.dom.Element;
 
@@ -24,39 +26,39 @@ public class ExecIdler extends AbstractIdler
     /**
      * Logger for log4j.
      */
-    private static Logger _log = Logger.getLogger(ExecIdler.class);
+    private static Logger _log = LogManager.getLogger();
 
-    /** 
+    /**
      * The size of the buffer the program's output is read into.
      */
     private static final int BUFF_SIZE = 4000;
 
-    /** 
+    /**
      * Pad the display to enhance readability.
      */
     private static final String PADDING = "  ***  ";
 
-    /** 
+    /**
      * The text to display.
      */
     private final StringBuffer _text = new StringBuffer();
 
-    /** 
+    /**
      * The name of the program to execute.
      */
     private String _program;
 
-    /** 
+    /**
      * Does this Idler have anything to display?
      */
     private boolean _valid;
 
-    /** 
+    /**
      * How often to update this feed in minutes.
      */
     private int _update;
 
-    /** 
+    /**
      * The Runtime object.
      */
     private static Runtime _runtime = Runtime.getRuntime();
@@ -87,7 +89,7 @@ public class ExecIdler extends AbstractIdler
         thread.start();
     }
 
-    /** 
+    /**
      * Re-read the feed from the given URL.
      * @return <code>true</code> if success, <code>false</code> otherwise.
      */
@@ -127,7 +129,7 @@ public class ExecIdler extends AbstractIdler
         return success;
     }
 
-    /** 
+    /**
      * Is there any text to display?
      * @return <code>true</code> if there is anything to display,
      * <code>false</code> otherwise.
@@ -137,7 +139,7 @@ public class ExecIdler extends AbstractIdler
         return _valid;
     }
 
-    /** 
+    /**
      * Get the text to display.
      * @return the text to display.
      */
@@ -161,8 +163,8 @@ public class ExecIdler extends AbstractIdler
     {
         return "Program = " + _program + "; Valid = " + _valid;
     }
-    
-    /** 
+
+    /**
      * Thread for handling periodic updates.
      * @author Darren Greaves
      */
@@ -175,7 +177,7 @@ public class ExecIdler extends AbstractIdler
         {
         }
 
-        /** 
+        /**
          * Update the feed.
          */
         public void run()

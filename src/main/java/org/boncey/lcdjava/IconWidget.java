@@ -1,6 +1,6 @@
 package org.boncey.lcdjava;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Icon Widget.
@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
  * @author Darren Greaves
  * @version $Id: IconWidget.java,v 1.2 2005-03-03 14:13:16 boncey Exp $
  */
-public class IconWidget extends PositionalWidget 
+public class IconWidget extends PositionalWidget
 {
     /**
      * Version details.
@@ -17,118 +17,113 @@ public class IconWidget extends PositionalWidget
     public static final String CVSID =
         "$Id: IconWidget.java,v 1.2 2005-03-03 14:13:16 boncey Exp $";
 
+
     /**
-     * Logger for log4j.
-     */
-    private static Logger _log = Logger.getLogger(LCD.class);
-
-
-    /** 
      * A predefined icon.
      */
     public static final String ICON_BLOCK_FILLED = "BLOCK_FILLED";
 
-    /** 
+    /**
      * A predefined icon.
      */
     public static final String ICON_HEART_OPEN = "HEART_OPEN";
 
-    /** 
+    /**
      * A predefined icon.
      */
     public static final String ICON_HEART_FILLED = "HEART_FILLED";
 
-    /** 
+    /**
      * A predefined icon.
      */
     public static final String ICON_ARROW_UP = "ARROW_UP";
 
-    /** 
+    /**
      * A predefined icon.
      */
     public static final String ICON_ARROW_DOWN = "ARROW_DOWN";
 
-    /** 
+    /**
      * A predefined icon.
      */
     public static final String ICON_ARROW_LEFT = "ARROW_LEFT";
 
-    /** 
+    /**
      * A predefined icon.
      */
     public static final String ICON_ARROW_RIGHT = "ARROW_RIGHT";
 
-    /** 
+    /**
      * A predefined icon.
      */
     public static final String ICON_CHECKBOX_OFF = "CHECKBOX_OFF";
 
-    /** 
+    /**
      * A predefined icon.
      */
     public static final String ICON_CHECKBOX_ON = "CHECKBOX_ON";
 
-    /** 
+    /**
      * A predefined icon.
      */
     public static final String ICON_CHECKBOX_GRAY = "CHECKBOX_GRAY";
 
-    /** 
+    /**
      * A predefined icon.
      */
     public static final String ICON_SELECTOR_AT_LEFT = "SELECTOR_AT_LEFT";
 
-    /** 
+    /**
      * A predefined icon.
      */
     public static final String ICON_SELECTOR_AT_RIGHT = "SELECTOR_AT_RIGHT";
 
-    /** 
+    /**
      * A predefined icon.
      */
     public static final String ICON_ELLIPSIS = "ELLIPSIS";
 
-    /** 
+    /**
      * A predefined icon.
      */
     public static final String ICON_PAUSE = "PAUSE";
 
-    /** 
+    /**
      * A predefined icon.
      */
     public static final String ICON_PLAY = "PLAY";
 
-    /** 
+    /**
      * A predefined icon.
      */
     public static final String ICON_PLAYR = "PLAYR";
 
-    /** 
+    /**
      * A predefined icon.
      */
     public static final String ICON_FF = "FF";
 
-    /** 
+    /**
      * A predefined icon.
      */
     public static final String ICON_FR = "FR";
 
-    /** 
+    /**
      * A predefined icon.
      */
     public static final String ICON_NEXT = "NEXT";
 
-    /** 
+    /**
      * A predefined icon.
      */
     public static final String ICON_PREV = "PREV";
 
-    /** 
+    /**
      * A predefined icon.
      */
     public static final String ICON_REC = "REC";
 
-    /** 
+    /**
      * The Widget iconName.
      */
     private String _iconName;
@@ -143,7 +138,7 @@ public class IconWidget extends PositionalWidget
         super(id, screen);
     }
 
-    /** 
+    /**
      * Get the Widget type.
      * @return the Widget type.
      */
@@ -162,7 +157,7 @@ public class IconWidget extends PositionalWidget
         update();
     }
 
-    /** 
+    /**
      * Get the Widget iconName.
      * @return the Widget iconName.
      */
@@ -171,7 +166,7 @@ public class IconWidget extends PositionalWidget
         return _iconName;
     }
 
-    /** 
+    /**
      * Return the data this Widget needs to update itself.
      * @return the data to update this Widget.
      */
@@ -180,7 +175,7 @@ public class IconWidget extends PositionalWidget
         return super.getData() + "\"" + stripQuotes(_iconName) + "\"";
     }
 
-    /** 
+    /**
      * Construct a new IconWidget.
      * @param screen the Screen that owns the Widget.
      * @param x the x position.

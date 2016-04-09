@@ -11,7 +11,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.apache.log4j.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.boncey.lcdjava.CheckboxMenuItem.CheckboxValue;
 
 /**
@@ -31,7 +33,7 @@ public class LCD implements LCDListener
     /**
      * Logger for log4j.
      */
-    private static final Logger _log = Logger.getLogger(LCD.class);
+    private static final Logger _log = LogManager.getLogger();
 
     /**
      * How often to poll for changes.

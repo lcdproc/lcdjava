@@ -1,6 +1,7 @@
 package org.boncey.lcdjava;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Abstract parent class for Widgets.
@@ -17,16 +18,11 @@ public abstract class AbstractWidget implements Widget
         "$Id: AbstractWidget.java,v 1.3 2008-07-06 15:38:34 boncey Exp $";
 
     /**
-     * Logger for log4j.
-     */
-    private static Logger _log = Logger.getLogger(LCD.class);
-
-    /** 
      * The Widget id.
      */
     private int _id;
 
-    /** 
+    /**
      * The Screen this Widget belongs to.
      */
     private Screen _screen;
@@ -42,7 +38,7 @@ public abstract class AbstractWidget implements Widget
         _screen = screen;
     }
 
-    /** 
+    /**
      * Get the Widget id.
      * @return the Widget id.
      */
@@ -51,7 +47,7 @@ public abstract class AbstractWidget implements Widget
         return _id;
     }
 
-    /** 
+    /**
      * Add this Widget to the Screen that constructed us.
      * @return whether or not the widget was added successfully.
      */
@@ -60,7 +56,7 @@ public abstract class AbstractWidget implements Widget
         return _screen.addWidget(this);
     }
 
-    /** 
+    /**
      * Remove this Widget from the Screen that constructed us.
      */
     public void remove()
@@ -68,7 +64,7 @@ public abstract class AbstractWidget implements Widget
         _screen.removeWidget(this);
     }
 
-    /** 
+    /**
      * Strip any quotes from the provided text.
      * @param text the text to strip quotes from.
      * @return the text with any quotes removed.
@@ -90,7 +86,7 @@ public abstract class AbstractWidget implements Widget
         return (text == null) ? null : ret.toString();
     }
 
-    /** 
+    /**
      * Update this Widget's state.
      */
     protected void update()

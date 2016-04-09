@@ -1,6 +1,6 @@
 package org.boncey.lcdjava.util;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 import org.boncey.lcdjava.Widget;
 
 /**
@@ -18,21 +18,16 @@ public class WidgetTimer implements Runnable
         "$Id: WidgetTimer.java,v 1.2 2005-03-03 14:13:16 boncey Exp $";
 
     /**
-     * Logger for log4j.
-     */
-    private static Logger _log = Logger.getLogger(WidgetTimer.class);
-
-    /** 
      * The class that holds a Widget for updating.
      */
     private WidgetUpdater _updater;
 
-    /** 
+    /**
      * Flag that tracks if we are alive or not.
      */
     private boolean _alive = true;
 
-    /** 
+    /**
      * How long to display the widget for (in milliseconds).
      */
     private int _timeout;
@@ -48,7 +43,7 @@ public class WidgetTimer implements Runnable
         _timeout = timeout;
     }
 
-    /** 
+    /**
      * Switch to the specified priority for the specified time period.
      */
     public void run()
@@ -67,7 +62,7 @@ public class WidgetTimer implements Runnable
         }
     }
 
-    /** 
+    /**
      * Return the wrapped Widget.
      * @return the Widget.
      */
@@ -76,7 +71,7 @@ public class WidgetTimer implements Runnable
         return _updater.getWidget();
     }
 
-    /** 
+    /**
      * Alter the timeout value and wake up the thread.
      * @param timeout the new timeout value.
      */
@@ -86,7 +81,7 @@ public class WidgetTimer implements Runnable
         notify();
     }
 
-    /** 
+    /**
      * Tell this thread to die gracefully.
      */
     public synchronized void destroy()

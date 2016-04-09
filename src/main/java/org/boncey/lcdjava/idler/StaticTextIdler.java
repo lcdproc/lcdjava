@@ -1,6 +1,6 @@
 package org.boncey.lcdjava.idler;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 import org.boncey.lcdjava.LCDException;
 import org.w3c.dom.Element;
 
@@ -19,11 +19,6 @@ public class StaticTextIdler extends AbstractIdler
         "$Id: StaticTextIdler.java,v 1.2 2005-03-03 14:13:16 boncey Exp $";
 
     /**
-     * Logger for log4j.
-     */
-    private static Logger _log = Logger.getLogger(StaticTextIdler.class);
-
-    /** 
      * The text to display.
      */
     private String _text;
@@ -42,7 +37,7 @@ public class StaticTextIdler extends AbstractIdler
         _text = config.getAttribute("text");
     }
 
-    /** 
+    /**
      * Get the text to display.
      * @return the text to display.
      */
@@ -58,7 +53,7 @@ public class StaticTextIdler extends AbstractIdler
     {
     }
 
-    /** 
+    /**
      * Is there any text to display?
      * @return <code>true</code> if there is anything to display,
      * <code>false</code> otherwise.
@@ -76,5 +71,5 @@ public class StaticTextIdler extends AbstractIdler
     {
         return "Text = " + _text;
     }
-    
+
 }

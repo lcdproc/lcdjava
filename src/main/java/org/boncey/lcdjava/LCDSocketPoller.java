@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.apache.log4j.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Thread that listens for data on the LCD socket.
@@ -23,7 +25,7 @@ public class LCDSocketPoller extends Thread
     /**
      * Logger for log4j.
      */
-    private static Logger _log = Logger.getLogger(LCDSocketPoller.class);
+    private static Logger _log = LogManager.getLogger();
 
     /**
      * How often to poll for changes.

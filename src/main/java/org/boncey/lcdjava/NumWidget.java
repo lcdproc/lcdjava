@@ -1,6 +1,6 @@
 package org.boncey.lcdjava;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Number Widget.
@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
  * @author Darren Greaves
  * @version $Id: NumWidget.java,v 1.2 2005-03-03 14:13:16 boncey Exp $
  */
-public class NumWidget extends AbstractWidget 
+public class NumWidget extends AbstractWidget
 {
     /**
      * Version details.
@@ -18,16 +18,11 @@ public class NumWidget extends AbstractWidget
         "$Id: NumWidget.java,v 1.2 2005-03-03 14:13:16 boncey Exp $";
 
     /**
-     * Logger for log4j.
-     */
-    private static Logger _log = Logger.getLogger(LCD.class);
-
-    /** 
      * The Widget number.
      */
     private int _number;
 
-    /** 
+    /**
      * The x position.
      */
     private int _x = 1;
@@ -42,7 +37,7 @@ public class NumWidget extends AbstractWidget
         super(id, screen);
     }
 
-    /** 
+    /**
      * Get the Widget type.
      * @return the Widget type.
      */
@@ -79,7 +74,7 @@ public class NumWidget extends AbstractWidget
         update();
     }
 
-    /** 
+    /**
      * Get the Widget number.
      * @return the Widget number.
      */
@@ -88,7 +83,7 @@ public class NumWidget extends AbstractWidget
         return _number;
     }
 
-    /** 
+    /**
      * Return the data this Widget needs to update itself.
      * @return the data to update this Widget.
      */
@@ -97,7 +92,7 @@ public class NumWidget extends AbstractWidget
         return _x + " " + _number;
     }
 
-    /** 
+    /**
      * Construct a new NumWidget.
      * @param screen the Screen that owns the Widget.
      * @param x the x position.

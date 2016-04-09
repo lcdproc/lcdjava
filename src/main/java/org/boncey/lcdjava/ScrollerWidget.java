@@ -1,6 +1,6 @@
 package org.boncey.lcdjava;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Scroller Widget.
@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
  * @author Darren Greaves
  * @version $Id: ScrollerWidget.java,v 1.2 2005-03-03 14:13:16 boncey Exp $
  */
-public class ScrollerWidget extends AbstractWidget 
+public class ScrollerWidget extends AbstractWidget
 {
     /**
      * Version details.
@@ -18,57 +18,52 @@ public class ScrollerWidget extends AbstractWidget
         "$Id: ScrollerWidget.java,v 1.2 2005-03-03 14:13:16 boncey Exp $";
 
     /**
-     * Logger for log4j.
-     */
-    private static Logger _log = Logger.getLogger(LCD.class);
-
-    /** 
      * The Horizontal direction.
      */
     public static final char DIRECTION_HORIZONTAL = 'h';
 
-    /** 
+    /**
      * The Vertical direction.
      */
     public static final char DIRECTION_VERTICAL = 'v';
 
-    /** 
+    /**
      * The 'Marquee' direction.
      * <p>Will loop around horizontally rather than bounce back and forth.
      */
     public static final char DIRECTION_MARQUEE = 'm';
 
-    /** 
+    /**
      * The top position of the scroller.
      */
     private int _top = 1;
 
-    /** 
+    /**
      * The bottom position of the scroller.
      */
     private int _bottom = 1;
 
-    /** 
+    /**
      * The left position of the scroller.
      */
     private int _left = 1;
 
-    /** 
+    /**
      * The right position of the scroller.
      */
     private int _right = 1;
 
-    /** 
+    /**
      * The direction to scroll.
      */
     private char _direction;
 
-    /** 
+    /**
      * The speed of the scroller.
      */
     private int _speed;
 
-    /** 
+    /**
      * The Widget text.
      */
     private String _text;
@@ -83,7 +78,7 @@ public class ScrollerWidget extends AbstractWidget
         super(id, screen);
     }
 
-    /** 
+    /**
      * Get the Widget type.
      * @return the Widget type.
      */
@@ -102,7 +97,7 @@ public class ScrollerWidget extends AbstractWidget
         update();
     }
 
-    /** 
+    /**
      * Get the Widget text.
      * @return the Widget text.
      */
@@ -230,7 +225,7 @@ public class ScrollerWidget extends AbstractWidget
         return _speed;
     }
 
-    /** 
+    /**
      * Return the data this Widget needs to update itself.
      * @return the data to update this Widget.
      */
@@ -240,7 +235,7 @@ public class ScrollerWidget extends AbstractWidget
                _direction + " " + _speed + " \"" + stripQuotes(_text) + "\"";
     }
 
-    /** 
+    /**
      * Construct a new ScrollerWidget.
      * @param screen the Screen that owns the Widget.
      * @param left the left position.

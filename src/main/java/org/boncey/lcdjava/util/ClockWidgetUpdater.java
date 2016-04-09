@@ -2,7 +2,7 @@ package org.boncey.lcdjava.util;
 
 import java.text.DateFormat;
 import java.util.Date;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 import org.boncey.lcdjava.StringWidget;
 import org.boncey.lcdjava.Widget;
 
@@ -21,16 +21,11 @@ public class ClockWidgetUpdater implements WidgetUpdater
         "$Id: ClockWidgetUpdater.java,v 1.2 2005-03-03 14:13:16 boncey Exp $";
 
     /**
-     * Logger for log4j.
-     */
-    private static Logger _log = Logger.getLogger(ClockWidgetUpdater.class);
-
-    /** 
      * The StringWidget we will be updating.
      */
     private StringWidget _widget;
 
-    /** 
+    /**
      * Store the time as a String so we only write it when it has changed.
      */
     private String _timeString;
@@ -44,7 +39,7 @@ public class ClockWidgetUpdater implements WidgetUpdater
         _widget = widget;
     }
 
-    /** 
+    /**
      * Update the clock.
      * @param timer the WidgetTimer.
      */
@@ -59,7 +54,7 @@ public class ClockWidgetUpdater implements WidgetUpdater
         }
     }
 
-    /** 
+    /**
      * Retrurn the wrapped Widget.
      * @return the Widget.
      */

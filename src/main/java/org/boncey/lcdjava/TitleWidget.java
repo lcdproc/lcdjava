@@ -1,6 +1,6 @@
 package org.boncey.lcdjava;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Title Widget.
@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
  * @author Darren Greaves
  * @version $Id: TitleWidget.java,v 1.3 2008-07-06 15:38:34 boncey Exp $
  */
-public class TitleWidget extends AbstractWidget 
+public class TitleWidget extends AbstractWidget
 {
     /**
      * Version details.
@@ -18,11 +18,6 @@ public class TitleWidget extends AbstractWidget
         "$Id: TitleWidget.java,v 1.3 2008-07-06 15:38:34 boncey Exp $";
 
     /**
-     * Logger for log4j.
-     */
-    private static Logger _log = Logger.getLogger(LCD.class);
-
-    /** 
      * The Widget text.
      */
     private String _text;
@@ -37,7 +32,7 @@ public class TitleWidget extends AbstractWidget
         super(id, screen);
     }
 
-    /** 
+    /**
      * Get the Widget type.
      * @return the Widget type.
      */
@@ -56,7 +51,7 @@ public class TitleWidget extends AbstractWidget
         update();
     }
 
-    /** 
+    /**
      * Get the Widget text.
      * @return the Widget text.
      */
@@ -65,7 +60,7 @@ public class TitleWidget extends AbstractWidget
         return _text;
     }
 
-    /** 
+    /**
      * Return the data this Widget needs to update itself.
      * @return the data to update this Widget.
      */
@@ -74,7 +69,7 @@ public class TitleWidget extends AbstractWidget
         return "\"" + stripQuotes(_text) + "\"";
     }
 
-    /** 
+    /**
      * Construct a new TitleWidget.
      * @param screen the Screen that owns the Widget.
      * @param text the widget text.

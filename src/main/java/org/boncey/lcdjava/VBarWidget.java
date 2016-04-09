@@ -1,6 +1,6 @@
 package org.boncey.lcdjava;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Vertical Bar Widget.
@@ -9,18 +9,13 @@ import org.apache.log4j.Logger;
  * @author Darren Greaves
  * @version $Id: VBarWidget.java,v 1.2 2005-03-03 14:13:16 boncey Exp $
  */
-public class VBarWidget extends BarWidget 
+public class VBarWidget extends BarWidget
 {
     /**
      * Version details.
      */
     public static final String CVSID =
         "$Id: VBarWidget.java,v 1.2 2005-03-03 14:13:16 boncey Exp $";
-
-    /**
-     * Logger for log4j.
-     */
-    private static Logger _log = Logger.getLogger(LCD.class);
 
     /**
      * Constructor.
@@ -32,7 +27,7 @@ public class VBarWidget extends BarWidget
         super(id, screen);
     }
 
-    /** 
+    /**
      * Get the Widget type.
      * @return the Widget type.
      */
@@ -41,7 +36,7 @@ public class VBarWidget extends BarWidget
         return Widget.WIDGET_VBAR;
     }
 
-    /** 
+    /**
      * Construct a new VBarWidget.
      * @param screen the Screen that owns the Widget.
      * @param x the x position.
