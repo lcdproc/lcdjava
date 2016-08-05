@@ -1,6 +1,5 @@
 package org.boncey.lcdjava.demo;
 
-import org.apache.logging.log4j.Logger;
 import org.boncey.lcdjava.LCD;
 import org.boncey.lcdjava.LCDException;
 import org.boncey.lcdjava.Screen;
@@ -19,11 +18,6 @@ public class Demo
      */
     public static final String CVSID =
         "$Id: Demo.java,v 1.1 2008-07-06 15:38:34 boncey Exp $";
-
-    /**
-     * Logger for log4j.
-     */
-    private static Logger _log = null;
 
     /**
      * Public constructor.

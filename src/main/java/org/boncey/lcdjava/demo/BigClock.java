@@ -1,7 +1,5 @@
 package org.boncey.lcdjava.demo;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.boncey.lcdjava.*;
 
 import java.util.Calendar;
@@ -15,8 +13,6 @@ import java.util.Calendar;
  * Tested on 16x2, 20x2 and 20x4 HD44780 compatible displays.
  */
 public class BigClock extends Thread {
-    private final Logger _log = LogManager.getLogger();
-
     private final LCD lcd;
 
     private static final int numPos[] = {1, 4, 8, 11, 15, 18};

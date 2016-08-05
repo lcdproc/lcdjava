@@ -4,9 +4,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.boncey.lcdjava.LCDException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 
 /**
@@ -26,7 +26,7 @@ public class ExecIdler extends AbstractIdler
     /**
      * Logger for log4j.
      */
-    private static Logger _log = LogManager.getLogger();
+    private static Logger _log = LoggerFactory.getLogger(ExecIdler.class);
 
     /**
      * The size of the buffer the program's output is read into.

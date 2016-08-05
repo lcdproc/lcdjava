@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Thread that listens for data on the LCD socket.
@@ -25,7 +25,7 @@ public class LCDSocketPoller extends Thread
     /**
      * Logger for log4j.
      */
-    private static Logger _log = LogManager.getLogger();
+    private static Logger _log = LoggerFactory.getLogger(LCDSocketPoller.class);
 
     /**
      * How often to poll for changes.

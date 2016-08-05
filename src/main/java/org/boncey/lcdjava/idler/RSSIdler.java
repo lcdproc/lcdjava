@@ -19,9 +19,9 @@ import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.boncey.lcdjava.LCDException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 
 /**
@@ -41,7 +41,7 @@ public class RSSIdler extends AbstractIdler
     /**
      * Logger for log4j.
      */
-    private static Logger _log = LogManager.getLogger();
+    private static Logger _log = LoggerFactory.getLogger(RSSIdler.class);
 
     /**
      * Pad the display to enhance readability.
