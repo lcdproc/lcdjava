@@ -1,7 +1,5 @@
 package org.boncey.lcdjava;
 
-import org.apache.logging.log4j.Logger;
-
 /**
  * Vertical Bar Widget.
  * <p>Displays a Vertical Bar on the LCD display.

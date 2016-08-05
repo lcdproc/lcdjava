@@ -1,7 +1,5 @@
 package org.boncey.lcdjava;
 
-import org.apache.logging.log4j.Logger;
-
 /**
  * Horizontal Bar Widget.
  * <p>Displays a Horizontal Bar on the LCD display.

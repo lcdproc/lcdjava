@@ -1,7 +1,5 @@
 package org.boncey.lcdjava;
 
-import org.apache.logging.log4j.Logger;
-
 /**
  * Abstract Widget that deals with x and y dimensions.
  * <p>Copyright (c) 2004-2005 Darren Greaves.

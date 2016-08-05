@@ -22,9 +22,6 @@ public class LCDSocketPoller extends Thread
     public static final String CVSID =
         "$Id: LCDSocketPoller.java,v 1.3 2008-07-06 15:38:34 boncey Exp $";
 
-    /**
-     * Logger for log4j.
-     */
     private static Logger _log = LoggerFactory.getLogger(LCDSocketPoller.class);
 
     /**

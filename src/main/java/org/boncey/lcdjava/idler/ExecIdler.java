@@ -23,9 +23,6 @@ public class ExecIdler extends AbstractIdler
     public static final String CVSID =
         "$Id: ExecIdler.java,v 1.2 2005-03-03 14:13:16 boncey Exp $";
 
-    /**
-     * Logger for log4j.
-     */
     private static Logger _log = LoggerFactory.getLogger(ExecIdler.class);
 
     /**

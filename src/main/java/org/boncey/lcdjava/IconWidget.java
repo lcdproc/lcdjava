@@ -1,7 +1,5 @@
 package org.boncey.lcdjava;
 
-import org.apache.logging.log4j.Logger;
-
 /**
  * Icon Widget.
  * <p>Displays a Icon on the LCD display.

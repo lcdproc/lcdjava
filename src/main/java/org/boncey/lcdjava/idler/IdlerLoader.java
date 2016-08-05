@@ -23,9 +23,6 @@ import org.w3c.dom.NodeList;
  */
 public class IdlerLoader
 {
-    /**
-     * Logger for log4j.
-     */
     private static Logger _log = LoggerFactory.getLogger(IdlerLoader.class);
 
     /**

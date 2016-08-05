@@ -1,7 +1,5 @@
 package org.boncey.lcdjava;
 
-import org.apache.logging.log4j.Logger;
-
 /**
  * Scroller Widget.
  * <p>Displays a scroller on the LCD display.

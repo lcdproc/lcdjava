@@ -1,6 +1,5 @@
 package org.boncey.lcdjava.idler;
 
-import org.apache.logging.log4j.Logger;
 import org.boncey.lcdjava.LCDException;
 import org.w3c.dom.Element;
 

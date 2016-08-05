@@ -1,10 +1,10 @@
 package org.boncey.lcdjava.util;
 
-import java.text.DateFormat;
-import java.util.Date;
-import org.apache.logging.log4j.Logger;
 import org.boncey.lcdjava.StringWidget;
 import org.boncey.lcdjava.Widget;
+
+import java.text.DateFormat;
+import java.util.Date;
 
 /**
  * StringWidget that updates with the current time.

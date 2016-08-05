@@ -1,8 +1,5 @@
 package org.boncey.lcdjava;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 /**
  * Abstract parent class for Widgets.
  * <p>Copyright (c) 2004-2005 Darren Greaves.

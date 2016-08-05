@@ -2,7 +2,6 @@ package org.boncey.lcdjava;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.logging.log4j.Logger;
 
 /**
   A Screen that can contain Widgets.

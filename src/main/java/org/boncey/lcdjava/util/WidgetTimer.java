@@ -1,6 +1,5 @@
 package org.boncey.lcdjava.util;
 
-import org.apache.logging.log4j.Logger;
 import org.boncey.lcdjava.Widget;
 
 /**

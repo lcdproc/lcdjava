@@ -30,9 +30,6 @@ public class LCD implements LCDListener
     public static final String CVSID =
         "$Id: LCD.java,v 1.3 2008-07-06 15:38:34 boncey Exp $";
 
-    /**
-     * Logger for log4j.
-     */
     private static final Logger _log = LoggerFactory.getLogger(LCD.class);
 
     /**

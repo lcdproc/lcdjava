@@ -1,12 +1,12 @@
 package org.boncey.lcdjava.idler;
 
-import java.util.List;
-import org.apache.logging.log4j.Logger;
 import org.boncey.lcdjava.LCD;
 import org.boncey.lcdjava.ScrollerWidget;
+import org.boncey.lcdjava.Widget;
 import org.boncey.lcdjava.util.WidgetTimer;
 import org.boncey.lcdjava.util.WidgetUpdater;
-import org.boncey.lcdjava.Widget;
+
+import java.util.List;
 
 /**
  * ScrollerWidget that updates a Widget with the text of the provided idler.

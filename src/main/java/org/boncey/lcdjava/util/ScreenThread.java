@@ -1,10 +1,10 @@
 package org.boncey.lcdjava.util;
 
+import org.boncey.lcdjava.Screen;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import org.apache.logging.log4j.Logger;
-import org.boncey.lcdjava.Screen;
 
 /**
  * A Runnable class to display a Screen for a specified time period.
