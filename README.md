@@ -43,3 +43,10 @@ home music player project (http://boncey.org/tags/wiphi).
 
 I'm happy to answer questions about the code via
 http://github.com/boncey/lcdjava.
+
+Project dependencies
+--------------------
+
+LCDjava uses the [Simple Logging Facade for Java (SLF4J)][slf4j] as its logger abstracter so as to not dictate a logging implementation on its users. SLF4J supports logging to its built-in Simple Logger (logs everything to the console), Log4j 1.2 and 2.x, Logback and java.util.logging.
+
+[slf4j]: http://www.slf4j.org/
