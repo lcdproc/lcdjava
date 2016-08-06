@@ -1,7 +1,13 @@
+LCDjava
+=======
+
 Java client for LCDproc (http://lcdproc.org/).
 
 This project was originally created by Darren Greaves in 2004-2008. It has been
 updated in 2016 and builds with JDK 1.8 and Maven 3.3.
+
+Building
+--------
 
 To build the project:
 
@@ -17,12 +23,16 @@ To package the project (excluding dependencies):
 
 	$ mvn package
 
-To run the demos from the resulting jar, or directly from the compiled class files:
+Example usage
+-------------
 
-	$ java -cp target/classes:$HOME/.m2/repository/log4j/log4j/1.2.6/log4j-1.2.6.jar org.boncey.lcdjava.demo.Demo <host> <port>
-	$ java -cp target/lcdjava-1.0-SNAPSHOT.jar:$HOME/.m2/repository/log4j/log4j/1.2.6/log4j-1.2.6.jar: org.boncey.lcdjava.demo.Demo <host> <port>
+See [basic_log4j][] and [bigclock_slf4j_simple][] for two example projects using LCDjava.
 
-Replace *Demo* with *BigClock* for the other demo.
+[basic_log4j]: https://github.com/antoneliasson/lcdjava-demo-basic-log4j2
+[bigclock_slf4j_simple]: https://github.com/antoneliasson/lcdjava-demo-bigclock-slf4j-simple
+
+Project information
+-------------------
 
 I used to use this with LCDproc on Linux a few years back but I have stopped
 using it now. I don't even have an LCD display hooked up anymore so am unable to
