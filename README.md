@@ -26,10 +26,9 @@ To package the project (excluding dependencies):
 Example usage
 -------------
 
-See [basic_log4j][] and [bigclock_slf4j_simple][] for two example projects using LCDjava.
+See [lcdjava-demos][] for two example projects using LCDjava. They demonstrate both how to use the LCDjava API and how to integrate the library in a larger Maven application.
 
-[basic_log4j]: https://github.com/antoneliasson/lcdjava-demo-basic-log4j2
-[bigclock_slf4j_simple]: https://github.com/antoneliasson/lcdjava-demo-bigclock-slf4j-simple
+[lcdjava-demos]: https://github.com/lcdproc/lcdjava-demos
 
 Project information
 -------------------
