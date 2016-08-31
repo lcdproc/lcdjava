@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+
+- Big rename! Project is now packaged under *org.lcdproc.lcdjava*.
+  Before it was *org.boncey.lcdjava*.
+
 ## 0.5.0 - 2016-08-31
 ### Added
 - First packaged release after over 10 years from the start of the

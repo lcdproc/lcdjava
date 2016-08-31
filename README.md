@@ -41,7 +41,7 @@ However, when I did use it seemed to work fine - I ran it as part of my Wiphi
 home music player project (http://boncey.org/tags/wiphi).
 
 I'm happy to answer questions about the code via
-http://github.com/boncey/lcdjava.
+http://github.com/lcdproc/lcdjava.
 
 Project dependencies
 --------------------
