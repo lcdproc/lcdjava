@@ -1,10 +1,10 @@
-package org.boncey.lcdjava.idler;
+package org.lcdproc.lcdjava.idler;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 
-import org.boncey.lcdjava.LCDException;
+import org.lcdproc.lcdjava.LCDException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;

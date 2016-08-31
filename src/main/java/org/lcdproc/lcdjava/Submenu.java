@@ -1,4 +1,4 @@
-package org.boncey.lcdjava;
+package org.lcdproc.lcdjava;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -50,7 +50,7 @@ public class Submenu extends AbstractMenuItem
      */
     public String getType()
     {
-        return MenuItem.MENUITEM_MENU;
+        return MENUITEM_MENU;
     }
 
     /** 
@@ -65,7 +65,7 @@ public class Submenu extends AbstractMenuItem
 
         try
         {
-            menuItem = (Submenu)menu.constructMenuItem(MenuItem.MENUITEM_MENU);
+            menuItem = (Submenu)menu.constructMenuItem(MENUITEM_MENU);
             menuItem.setText(text);
         }
         catch (LCDException e) //NOPMD
@@ -88,35 +88,35 @@ public class Submenu extends AbstractMenuItem
         MenuItem item;
 
         synchronized (this) {
-	        if (type.equals(MenuItem.MENUITEM_MENU))
+	        if (type.equals(MENUITEM_MENU))
 	        {
 	            item = new Submenu(_lcd, getID() + "_" + Integer.toString(_menuItemCounter), this);
 	        }
-	        else if (type.equals(MenuItem.MENUITEM_ACTION))
+	        else if (type.equals(MENUITEM_ACTION))
 	        {
 	            item = new ActionMenuItem(getID() + "_" + Integer.toString(_menuItemCounter), this);
 	        }
-	        else if (type.equals(MenuItem.MENUITEM_CHECKBOX))
+	        else if (type.equals(MENUITEM_CHECKBOX))
 	        {
 	        	item = new CheckboxMenuItem(getID() + "_" + Integer.toString(_menuItemCounter), this);
 	        }
-	        else if (type.equals(MenuItem.MENUITEM_RING))
+	        else if (type.equals(MENUITEM_RING))
 	        {
 	        	item = new RingMenuItem(getID() + "_" + Integer.toString(_menuItemCounter), this);
 	        }
-	        else if (type.equals(MenuItem.MENUITEM_SLIDER))
+	        else if (type.equals(MENUITEM_SLIDER))
 	        {
 	        	item = new SliderMenuItem(getID() + "_" + Integer.toString(_menuItemCounter), this);
 	        }
-	        else if (type.equals(MenuItem.MENUITEM_NUMERIC))
+	        else if (type.equals(MENUITEM_NUMERIC))
 	        {
 	        	item = new NumericMenuItem(getID() + "_" + Integer.toString(_menuItemCounter), this);
 	        }
-	        else if (type.equals(MenuItem.MENUITEM_ALPHA))
+	        else if (type.equals(MENUITEM_ALPHA))
 	        {
 	        	item = new AlphaMenuItem(getID() + "_" + Integer.toString(_menuItemCounter), this);
 	        }
-	        else if (type.equals(MenuItem.MENUITEM_IP))
+	        else if (type.equals(MENUITEM_IP))
 	        {
 	        	item = new IpMenuItem(getID() + "_" + Integer.toString(_menuItemCounter), this);
 	        }

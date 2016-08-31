@@ -1,4 +1,4 @@
-package org.boncey.lcdjava;
+package org.lcdproc.lcdjava;
 
 /**
  * Icon Widget.
@@ -142,7 +142,7 @@ public class IconWidget extends PositionalWidget
      */
     public String getType()
     {
-        return Widget.WIDGET_ICON;
+        return WIDGET_ICON;
     }
 
     /**
@@ -190,7 +190,7 @@ public class IconWidget extends PositionalWidget
 
         try
         {
-            widget = (IconWidget)screen.constructWidget(Widget.WIDGET_ICON);
+            widget = (IconWidget)screen.constructWidget(WIDGET_ICON);
             widget.setX(x);
             widget.setY(y);
             widget.setText(iconName);

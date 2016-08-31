@@ -1,4 +1,4 @@
-package org.boncey.lcdjava.util;
+package org.lcdproc.lcdjava.util;
 
 /**
  * Hook called when a ScreenThread times out.

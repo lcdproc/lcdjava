@@ -1,4 +1,4 @@
-package org.boncey.lcdjava.idler;
+package org.lcdproc.lcdjava.idler;
 
 /**
  * Interface for anything that wants to display <i>idle information</i>

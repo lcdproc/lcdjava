@@ -1,4 +1,4 @@
-package org.boncey.lcdjava;
+package org.lcdproc.lcdjava;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

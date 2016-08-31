@@ -1,4 +1,4 @@
-package org.boncey.lcdjava;
+package org.lcdproc.lcdjava;
 
 
 
@@ -36,7 +36,7 @@ public class NumericMenuItem extends AbstractMenuItem
      */
     public String getType()
     {
-        return MenuItem.MENUITEM_NUMERIC;
+        return MENUITEM_NUMERIC;
     }
     
     /**
@@ -134,7 +134,7 @@ public class NumericMenuItem extends AbstractMenuItem
 
         try
         {
-            menuItem = (NumericMenuItem)menu.constructMenuItem(MenuItem.MENUITEM_NUMERIC);
+            menuItem = (NumericMenuItem)menu.constructMenuItem(MENUITEM_NUMERIC);
             menuItem.setText(text);
             menuItem.setMinValue(minValue);
             menuItem.setMaxValue(maxValue);

@@ -1,4 +1,4 @@
-package org.boncey.lcdjava;
+package org.lcdproc.lcdjava;
 
 
 
@@ -35,7 +35,7 @@ public class SliderMenuItem extends NumericMenuItem
      */
     public String getType()
     {
-        return MenuItem.MENUITEM_SLIDER;
+        return MENUITEM_SLIDER;
     }
     
     /**
@@ -109,7 +109,7 @@ public class SliderMenuItem extends NumericMenuItem
 
         try
         {
-            menuItem = (SliderMenuItem)menu.constructMenuItem(MenuItem.MENUITEM_SLIDER);
+            menuItem = (SliderMenuItem)menu.constructMenuItem(MENUITEM_SLIDER);
             menuItem.setText(text);
             menuItem.setMinValue(minValue);
             menuItem.setMaxValue(maxValue);

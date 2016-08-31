@@ -1,4 +1,4 @@
-package org.boncey.lcdjava;
+package org.lcdproc.lcdjava;
 
 
 
@@ -46,7 +46,7 @@ public class AlphaMenuItem extends AbstractMenuItem
      */
     public String getType()
     {
-        return MenuItem.MENUITEM_ALPHA;
+        return MENUITEM_ALPHA;
     }
     
     /**
@@ -180,7 +180,7 @@ public class AlphaMenuItem extends AbstractMenuItem
 
         try
         {
-            menuItem = (AlphaMenuItem)menu.constructMenuItem(MenuItem.MENUITEM_ALPHA);
+            menuItem = (AlphaMenuItem)menu.constructMenuItem(MENUITEM_ALPHA);
             menuItem.setValue(current);
             menuItem.setText(text);
         }

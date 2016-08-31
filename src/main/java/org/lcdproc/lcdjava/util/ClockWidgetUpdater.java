@@ -1,7 +1,7 @@
-package org.boncey.lcdjava.util;
+package org.lcdproc.lcdjava.util;
 
-import org.boncey.lcdjava.StringWidget;
-import org.boncey.lcdjava.Widget;
+import org.lcdproc.lcdjava.StringWidget;
+import org.lcdproc.lcdjava.Widget;
 
 import java.text.DateFormat;
 import java.util.Date;

@@ -1,13 +1,13 @@
-package org.boncey.lcdjava.idler;
+package org.lcdproc.lcdjava.idler;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.boncey.lcdjava.LCDException;
-import org.boncey.lcdjava.ScrollerWidget;
-import org.boncey.lcdjava.util.WidgetTimer;
+import org.lcdproc.lcdjava.LCDException;
+import org.lcdproc.lcdjava.ScrollerWidget;
+import org.lcdproc.lcdjava.util.WidgetTimer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;

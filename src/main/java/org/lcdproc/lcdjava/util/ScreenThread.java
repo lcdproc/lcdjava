@@ -1,6 +1,6 @@
-package org.boncey.lcdjava.util;
+package org.lcdproc.lcdjava.util;
 
-import org.boncey.lcdjava.Screen;
+import org.lcdproc.lcdjava.Screen;
 
 import java.util.ArrayList;
 import java.util.Iterator;

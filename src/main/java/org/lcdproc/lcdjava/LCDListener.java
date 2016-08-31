@@ -1,4 +1,4 @@
-package org.boncey.lcdjava;
+package org.lcdproc.lcdjava;
 
 /**
  * Interface for listening to the state returned from LCDd.

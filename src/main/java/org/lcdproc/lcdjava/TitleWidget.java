@@ -1,4 +1,4 @@
-package org.boncey.lcdjava;
+package org.lcdproc.lcdjava;
 
 /**
  * Title Widget.
@@ -36,7 +36,7 @@ public class TitleWidget extends AbstractWidget
      */
     public String getType()
     {
-        return Widget.WIDGET_TITLE;
+        return WIDGET_TITLE;
     }
 
     /**
@@ -79,7 +79,7 @@ public class TitleWidget extends AbstractWidget
 
         try
         {
-            widget = (TitleWidget)screen.constructWidget(Widget.WIDGET_TITLE);
+            widget = (TitleWidget)screen.constructWidget(WIDGET_TITLE);
             widget.setText(text);
         }
         catch (LCDException e)

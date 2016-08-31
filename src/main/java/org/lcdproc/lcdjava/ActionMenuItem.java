@@ -1,4 +1,4 @@
-package org.boncey.lcdjava;
+package org.lcdproc.lcdjava;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -52,7 +52,7 @@ public class ActionMenuItem extends AbstractMenuItem
      */
     public String getType()
     {
-        return MenuItem.MENUITEM_ACTION;
+        return MENUITEM_ACTION;
     }
 
     /**
@@ -93,7 +93,7 @@ public class ActionMenuItem extends AbstractMenuItem
 
         try
         {
-            menuItem = (ActionMenuItem)menu.constructMenuItem(MenuItem.MENUITEM_ACTION);
+            menuItem = (ActionMenuItem)menu.constructMenuItem(MENUITEM_ACTION);
             menuItem.setMenuResult(result);
             menuItem.setText(text);
         }

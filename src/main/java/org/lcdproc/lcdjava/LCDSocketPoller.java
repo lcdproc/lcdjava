@@ -1,4 +1,4 @@
-package org.boncey.lcdjava;
+package org.lcdproc.lcdjava;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package org.boncey.lcdjava;
+package org.lcdproc.lcdjava;
 
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
@@ -12,7 +12,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.boncey.lcdjava.CheckboxMenuItem.CheckboxValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -418,11 +417,11 @@ public class LCD implements LCDListener
                 case LCD.EVENT_UPDATE:
                     if (menu instanceof CheckboxMenuItem) {
                         if ("on".equals(value)) {
-                            ((CheckboxMenuItem) menu).setValueNoUpdate(CheckboxValue.On);
+                            ((CheckboxMenuItem) menu).setValueNoUpdate(CheckboxMenuItem.CheckboxValue.On);
                         } else if ("off".equals(value)) {
-                            ((CheckboxMenuItem) menu).setValueNoUpdate(CheckboxValue.Off);
+                            ((CheckboxMenuItem) menu).setValueNoUpdate(CheckboxMenuItem.CheckboxValue.Off);
                         } else if ("gray".equals(value)) {
-                            ((CheckboxMenuItem) menu).setValueNoUpdate(CheckboxValue.Gray);
+                            ((CheckboxMenuItem) menu).setValueNoUpdate(CheckboxMenuItem.CheckboxValue.Gray);
                         }
                         ((CheckboxMenuItem) menu).notifyActionPerformed(new ActionEvent(menu, ActionEvent.ACTION_PERFORMED, menu.getID()));
                     } else if (menu instanceof RingMenuItem) {

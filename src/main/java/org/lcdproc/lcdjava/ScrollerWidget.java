@@ -1,4 +1,4 @@
-package org.boncey.lcdjava;
+package org.lcdproc.lcdjava;
 
 /**
  * Scroller Widget.
@@ -82,7 +82,7 @@ public class ScrollerWidget extends AbstractWidget
      */
     public String getType()
     {
-        return Widget.WIDGET_SCROLLER;
+        return WIDGET_SCROLLER;
     }
 
     /**
@@ -259,7 +259,7 @@ public class ScrollerWidget extends AbstractWidget
         try
         {
             widget = (ScrollerWidget)screen.constructWidget(
-                    Widget.WIDGET_SCROLLER);
+                    WIDGET_SCROLLER);
             widget.setLeft(left);
             widget.setTop(top);
             widget.setRight(right);

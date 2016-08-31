@@ -1,4 +1,4 @@
-package org.boncey.lcdjava;
+package org.lcdproc.lcdjava;
 
 
 
@@ -52,7 +52,7 @@ public class CheckboxMenuItem extends AbstractMenuItem
      */
     public String getType()
     {
-        return MenuItem.MENUITEM_CHECKBOX;
+        return MENUITEM_CHECKBOX;
     }
 
     /**
@@ -126,7 +126,7 @@ public class CheckboxMenuItem extends AbstractMenuItem
 
         try
         {
-            menuItem = (CheckboxMenuItem)menu.constructMenuItem(MenuItem.MENUITEM_CHECKBOX);
+            menuItem = (CheckboxMenuItem)menu.constructMenuItem(MENUITEM_CHECKBOX);
             menuItem.setAllowGray(allowGray);
             menuItem.setText(text);
         }

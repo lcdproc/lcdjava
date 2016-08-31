@@ -1,4 +1,4 @@
-package org.boncey.lcdjava;
+package org.lcdproc.lcdjava;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,7 +35,7 @@ public class RingMenuItem extends AbstractMenuItem
      */
     public String getType()
     {
-        return MenuItem.MENUITEM_RING;
+        return MENUITEM_RING;
     }
     
     public void setItems(List<String> items) {
@@ -120,7 +120,7 @@ public class RingMenuItem extends AbstractMenuItem
 
         try
         {
-            menuItem = (RingMenuItem)menu.constructMenuItem(MenuItem.MENUITEM_RING);
+            menuItem = (RingMenuItem)menu.constructMenuItem(MENUITEM_RING);
             menuItem.setItems(items);
             menuItem.setText(text);
         }

@@ -1,4 +1,4 @@
-package org.boncey.lcdjava;
+package org.lcdproc.lcdjava;
 
 /**
  * Exception that wraps any Exceptions thrown when interacting with LCDProc.

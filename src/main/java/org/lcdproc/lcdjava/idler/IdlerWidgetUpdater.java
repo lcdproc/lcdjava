@@ -1,10 +1,10 @@
-package org.boncey.lcdjava.idler;
+package org.lcdproc.lcdjava.idler;
 
-import org.boncey.lcdjava.LCD;
-import org.boncey.lcdjava.ScrollerWidget;
-import org.boncey.lcdjava.Widget;
-import org.boncey.lcdjava.util.WidgetTimer;
-import org.boncey.lcdjava.util.WidgetUpdater;
+import org.lcdproc.lcdjava.LCD;
+import org.lcdproc.lcdjava.ScrollerWidget;
+import org.lcdproc.lcdjava.Widget;
+import org.lcdproc.lcdjava.util.WidgetTimer;
+import org.lcdproc.lcdjava.util.WidgetUpdater;
 
 import java.util.List;
 

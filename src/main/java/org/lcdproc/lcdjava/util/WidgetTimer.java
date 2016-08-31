@@ -1,6 +1,6 @@
-package org.boncey.lcdjava.util;
+package org.lcdproc.lcdjava.util;
 
-import org.boncey.lcdjava.Widget;
+import org.lcdproc.lcdjava.Widget;
 
 /**
  * A Runnable class to update a Widget on a specified time period.

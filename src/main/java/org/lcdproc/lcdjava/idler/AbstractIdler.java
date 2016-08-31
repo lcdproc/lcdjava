@@ -1,6 +1,6 @@
-package org.boncey.lcdjava.idler;
+package org.lcdproc.lcdjava.idler;
 
-import org.boncey.lcdjava.LCDException;
+import org.lcdproc.lcdjava.LCDException;
 import org.w3c.dom.Element;
 
 /**

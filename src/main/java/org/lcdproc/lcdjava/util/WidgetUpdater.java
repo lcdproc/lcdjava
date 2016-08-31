@@ -1,6 +1,6 @@
-package org.boncey.lcdjava.util;
+package org.lcdproc.lcdjava.util;
 
-import org.boncey.lcdjava.Widget;
+import org.lcdproc.lcdjava.Widget;
 
 /**
  * Interface for holding a Widget that will be updated by the WidgetTimer class.
