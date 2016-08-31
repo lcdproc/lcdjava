@@ -19,4 +19,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
   thing that is different. It does however require a modern JDK (1.8)
   and Maven has replaced Ant as the build system.
 
-[Unreleased]: https://github.com/lcdproc/lcdjava/compare/v0.5.0...HEAD
+[Unreleased]: https://github.com/lcdproc/lcdjava/compare/0.5.0...HEAD
