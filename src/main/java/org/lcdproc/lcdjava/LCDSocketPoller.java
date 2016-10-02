@@ -10,19 +10,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Thread that listens for data on the LCD socket.
- * <p>Copyright (c) 2004-2005 Darren Greaves.
- *
- * @author Darren Greaves
- * @version $Id: LCDSocketPoller.java,v 1.3 2008-07-06 15:38:34 boncey Exp $
  */
-public class LCDSocketPoller extends Thread {
-    /**
-     * Version details.
-     */
-    public static final String CVSID =
-            "$Id: LCDSocketPoller.java,v 1.3 2008-07-06 15:38:34 boncey Exp $";
-
-    private static Logger _log = LoggerFactory.getLogger(LCDSocketPoller.class);
+class LCDSocketPoller extends Thread {
+    private final Logger _log = LoggerFactory.getLogger(LCDSocketPoller.class);
 
     /**
      * The Pattern that matches ignore/listen events.
@@ -39,7 +29,7 @@ public class LCDSocketPoller extends Thread {
     /**
      * The Reader to read data from.
      */
-    private BufferedReader _in;
+    private final BufferedReader _in;
 
     /**
      * The last line of data received.
@@ -50,23 +40,20 @@ public class LCDSocketPoller extends Thread {
     /**
      * The listener to notify of listen/ignore events.
      */
-    private LCDListener _listener;
+    private final LCDListener _listener;
 
     /**
      * Public constructor.
      *
-     * @param in       the BufferedReader that will recieve data from the server.
+     * @param in       the BufferedReader that will receive data from the server.
      * @param listener the LCDListener that gets notified of screens being
      *                 listened to or ignored.
      */
-    public LCDSocketPoller(BufferedReader in, LCDListener listener) {
+    LCDSocketPoller(BufferedReader in, LCDListener listener) {
         _in = in;
         _listener = listener;
     }
 
-    /**
-     * Poll the socket every 100 milliseconds.
-     */
     @Override
     public void run() {
         try {
