@@ -456,25 +456,27 @@ public class LCD implements LCDListener
      * Shut down the server, terminating any threads.
      * @throws LCDException in case of a network problem.
      */
+    @SuppressWarnings("WeakerAccess")
     public void shutdown()
         throws LCDException
     {
         _log.debug("Shutdown requested");
         if (_poller != null)
         {
-            _poller.interrupt();
-            _log.debug("Waiting for LCDSocketPoller to terminate...");
             try {
+                _log.debug("Carefully killing socket...");
+                _socket.shutdownInput();
+                _log.debug("Waiting for LCDSocketPoller to terminate...");
                 _poller.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            } catch (InterruptedException | IOException e) {
+                _log.error(e.toString());
             }
         }
 
         try
         {
             _log.debug("Closing socket");
-            if (_socket != null && !_socket.isClosed())
+            if (_socket != null)
             {
                 _socket.close();
             }

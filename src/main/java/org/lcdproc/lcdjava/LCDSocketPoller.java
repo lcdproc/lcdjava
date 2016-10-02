@@ -25,11 +25,6 @@ public class LCDSocketPoller extends Thread {
     private static Logger _log = LoggerFactory.getLogger(LCDSocketPoller.class);
 
     /**
-     * How often to poll for changes.
-     */
-    private static final int POLL = 100;
-
-    /**
      * The Pattern that matches ignore/listen events.
      */
     private static final Pattern IGNORE_STATUS = Pattern.compile(
@@ -74,42 +69,26 @@ public class LCDSocketPoller extends Thread {
      */
     @Override
     public void run() {
-        while (!interrupted()) {
-            try {
-                if (_in.ready()) {
-                    _lastLine = _in.readLine();
-                    if (_lastLine == null)
-                        continue;
-                    Matcher listenIgnore = IGNORE_STATUS.matcher(_lastLine);
-                    Matcher menuEvent = MENU_STATUS.matcher(_lastLine);
-                    if (_lastLine.startsWith(LCD.RESPONSE_ERROR)) {
-                        _log.warn("Got a response of " + _lastLine +
-                                " from server");
-                    } else if (_listener != null) {
-
-                        if (listenIgnore.matches()) {
-                            boolean listen = (LCD.RESPONSE_LISTEN.equals(
-                                    listenIgnore.group(1)));
-                            try {
-                                int screenId = Integer.parseInt(listenIgnore.group(2));
-                                _listener.setListenStatus(screenId, listen);
-                            } catch (NumberFormatException e) {
-                                // Ignore
-                            }
-                        } else if (menuEvent.matches()) {
-                            _listener.menuAction(menuEvent.group(2), menuEvent.group(1), menuEvent.group(3));
-                        }
-                    }
-                } else {
-                    Thread.sleep(POLL);
+        try {
+            while ((_lastLine = _in.readLine()) != null) {
+                if (_lastLine.startsWith(LCD.RESPONSE_ERROR)) {
+                    _log.warn("Got a response of " + _lastLine +
+                            " from server");
                 }
-            } catch (InterruptedException e) {
-                interrupt();
-            } catch (IOException e) {
-                _log.error("Caught IOException", e);
+                Matcher listenIgnore = IGNORE_STATUS.matcher(_lastLine);
+                Matcher menuEvent = MENU_STATUS.matcher(_lastLine);
+                if (listenIgnore.matches()) {
+                    boolean listen = (LCD.RESPONSE_LISTEN.equals(listenIgnore.group(1)));
+                    int screenId = Integer.parseInt(listenIgnore.group(2));
+                    _listener.setListenStatus(screenId, listen);
+                } else if (menuEvent.matches()) {
+                    _listener.menuAction(menuEvent.group(2), menuEvent.group(1), menuEvent.group(3));
+                }
             }
+        } catch (IOException e) {
+            _log.error("Caught IOException", e);
+            throw new LCDException(e);
         }
-
         _log.debug("Terminating");
     }
 
