@@ -11,16 +11,16 @@ import org.slf4j.LoggerFactory;
 /**
  * Thread that listens for data on the LCD socket.
  * <p>Copyright (c) 2004-2005 Darren Greaves.
+ *
  * @author Darren Greaves
  * @version $Id: LCDSocketPoller.java,v 1.3 2008-07-06 15:38:34 boncey Exp $
  */
-public class LCDSocketPoller extends Thread
-{
+public class LCDSocketPoller extends Thread {
     /**
      * Version details.
      */
     public static final String CVSID =
-        "$Id: LCDSocketPoller.java,v 1.3 2008-07-06 15:38:34 boncey Exp $";
+            "$Id: LCDSocketPoller.java,v 1.3 2008-07-06 15:38:34 boncey Exp $";
 
     private static Logger _log = LoggerFactory.getLogger(LCDSocketPoller.class);
 
@@ -59,12 +59,12 @@ public class LCDSocketPoller extends Thread
 
     /**
      * Public constructor.
-     * @param in the BufferedReader that will recieve data from the server.
+     *
+     * @param in       the BufferedReader that will recieve data from the server.
      * @param listener the LCDListener that gets notified of screens being
-     * listened to or ignored.
+     *                 listened to or ignored.
      */
-    public LCDSocketPoller(BufferedReader in, LCDListener listener)
-    {
+    public LCDSocketPoller(BufferedReader in, LCDListener listener) {
         _in = in;
         _listener = listener;
     }
@@ -73,56 +73,39 @@ public class LCDSocketPoller extends Thread
      * Poll the socket every 100 milliseconds.
      */
     @Override
-    public void run()
-    {
-        while (!interrupted())
-        {
+    public void run() {
+        while (!interrupted()) {
             try {
-                if (!_in.ready()) {
-                    Thread.sleep(POLL);
-                }
-                if (_in.ready())
-                {
+                if (_in.ready()) {
                     _lastLine = _in.readLine();
                     if (_lastLine == null)
                         continue;
                     Matcher listenIgnore = IGNORE_STATUS.matcher(_lastLine);
                     Matcher menuEvent = MENU_STATUS.matcher(_lastLine);
-                    if (_lastLine.startsWith(LCD.RESPONSE_ERROR))
-                    {
+                    if (_lastLine.startsWith(LCD.RESPONSE_ERROR)) {
                         _log.warn("Got a response of " + _lastLine +
                                 " from server");
-                    }
-                    else if (_listener != null)
-                    {
+                    } else if (_listener != null) {
 
-                        if (listenIgnore.matches())
-                        {
+                        if (listenIgnore.matches()) {
                             boolean listen = (LCD.RESPONSE_LISTEN.equals(
-                                        listenIgnore.group(1)));
-                            try
-                            {
+                                    listenIgnore.group(1)));
+                            try {
                                 int screenId = Integer.parseInt(listenIgnore.group(2));
                                 _listener.setListenStatus(screenId, listen);
-                            }
-                            catch (NumberFormatException e)
-                            {
+                            } catch (NumberFormatException e) {
                                 // Ignore
                             }
-                        }
-                        else if (menuEvent.matches())
-                        {
+                        } else if (menuEvent.matches()) {
                             _listener.menuAction(menuEvent.group(2), menuEvent.group(1), menuEvent.group(3));
                         }
                     }
+                } else {
+                    Thread.sleep(POLL);
                 }
-            }
-            catch (InterruptedException e)
-            {
+            } catch (InterruptedException e) {
                 interrupt();
-            }
-            catch (IOException e)
-            {
+            } catch (IOException e) {
                 _log.error("Caught IOException", e);
             }
         }
@@ -133,10 +116,10 @@ public class LCDSocketPoller extends Thread
     /**
      * Get the last line received <i>non-blocking</i>.
      * <p>Calling this clears the last line received.
+     *
      * @return the last line received.
      */
-    synchronized String getLastLine()
-    {
+    synchronized String getLastLine() {
         String ret = _lastLine;
         _lastLine = null;
         return ret;
