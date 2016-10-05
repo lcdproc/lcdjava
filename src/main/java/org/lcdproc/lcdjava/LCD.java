@@ -9,6 +9,8 @@ import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -627,38 +629,28 @@ public class LCD implements LCDListener
      * @return the response from the server.
      * @throws IOException in case of a network problem.
      */
-    private String connect(String host, int port, String clientName)
-        throws IOException
-    {
+    private String connect(String host, int port, String clientName) throws IOException {
         _socket = new Socket(host, port);
         BufferedReader in = new BufferedReader(new InputStreamReader(
-                    _socket.getInputStream()));
+                _socket.getInputStream()));
         _out = new BufferedWriter(new OutputStreamWriter(
-                    _socket.getOutputStream()));
-        _poller = new LCDSocketPoller(in, this);
+                _socket.getOutputStream()));
+        Semaphore serverHello = new Semaphore(1);
+        _poller = new LCDSocketPoller(in, this, serverHello);
         _poller.start();
-
         write(CMD_INIT);
-        String response = null;
-
-        for (int i = 0; i < POLL_REPEAT && response == null; i++)
-        {
-            synchronized (this)
-            {
-                try
-                {
-                    Thread.sleep(POLL);
-                    response = _poller.getLastLine();
-                }
-                catch (InterruptedException e)
-                {
-                    // Do nothing
-                }
+        try {
+            if (serverHello.tryAcquire(5, TimeUnit.SECONDS)) {
+                String version = _poller.getLastLine();
+                write(CMD_CLIENT_SET + clientName);
+                return version;
+            } else {
+                // Timeout => failed to connect
+                return null;
             }
+        } catch (InterruptedException e) {
+            return null;
         }
-        write(CMD_CLIENT_SET + clientName);
-
-        return response;
     }
 
     /**

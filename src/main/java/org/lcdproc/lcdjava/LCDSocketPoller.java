@@ -2,6 +2,7 @@ package org.lcdproc.lcdjava;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.concurrent.Semaphore;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -42,6 +43,8 @@ class LCDSocketPoller extends Thread {
      */
     private final LCDListener _listener;
 
+    private Semaphore hello;
+
     /**
      * Public constructor.
      *
@@ -49,21 +52,23 @@ class LCDSocketPoller extends Thread {
      * @param listener the LCDListener that gets notified of screens being
      *                 listened to or ignored.
      */
-    LCDSocketPoller(BufferedReader in, LCDListener listener) {
+    LCDSocketPoller(BufferedReader in, LCDListener listener, Semaphore hello) throws IOException {
         _in = in;
         _listener = listener;
+        this.hello = hello;
     }
 
     @Override
     public void run() {
         try {
-            while ((_lastLine = _in.readLine()) != null) {
-                if (_lastLine.startsWith(LCD.RESPONSE_ERROR)) {
-                    _log.warn("Got a response of " + _lastLine +
+            String line;
+            while ((line = _in.readLine()) != null) {
+                if (line.startsWith(LCD.RESPONSE_ERROR)) {
+                    _log.warn("Got a response of " + line +
                             " from server");
                 }
-                Matcher listenIgnore = IGNORE_STATUS.matcher(_lastLine);
-                Matcher menuEvent = MENU_STATUS.matcher(_lastLine);
+                Matcher listenIgnore = IGNORE_STATUS.matcher(line);
+                Matcher menuEvent = MENU_STATUS.matcher(line);
                 if (listenIgnore.matches()) {
                     boolean listen = (LCD.RESPONSE_LISTEN.equals(listenIgnore.group(1)));
                     int screenId = Integer.parseInt(listenIgnore.group(2));
@@ -71,9 +76,12 @@ class LCDSocketPoller extends Thread {
                 } else if (menuEvent.matches()) {
                     _listener.menuAction(menuEvent.group(2), menuEvent.group(1), menuEvent.group(3));
                 }
+                synchronized (this) {
+                    _lastLine = line;
+                }
+                hello.release();
             }
         } catch (IOException e) {
-            _log.error("Caught IOException", e);
             throw new LCDException(e);
         }
         _log.debug("Terminating");
